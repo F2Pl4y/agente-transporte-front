@@ -10,7 +10,13 @@ function resolveApiBaseUrl() {
     return DEFAULT_API_BASE_URL;
   }
   
-  // 1. Si se pasó como parámetro en la URL: ?api=https://tunel.trycloudflare.com
+  // 1. Si la web se carga directamente desde Cloudflare Tunnel o la ruta interna /app
+  // Backend y Frontend están en el mismo dominio (Same-Origin)
+  if (window.location.hostname.endsWith('trycloudflare.com') || window.location.pathname.startsWith('/app')) {
+    return window.location.origin;
+  }
+
+  // 2. Si se pasó como parámetro en la URL: ?api=https://tunel.trycloudflare.com
   try {
     const urlParams = new URLSearchParams(window.location.search);
     const paramApi = urlParams.get('api');
