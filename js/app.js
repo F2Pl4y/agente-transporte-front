@@ -42,21 +42,46 @@ function initApp() {
   checkBackendHealth();
   setInterval(checkBackendHealth, 30000); // Re-verificar periódicamente
 
-  // 2. Enviar mensaje del usuario
+  // 1.5. Control de Concurrencia en Frontend: Candado estricto contra peticiones simultáneas
+  let isProcessingQuery = false;
+
+  function updateSendButtonState() {
+    if (!sendBtn) return;
+    // El botón se deshabilita y se vuelve gris mate ÚNICAMENTE cuando hay una consulta en camino
+    sendBtn.disabled = isProcessingQuery;
+    if (isProcessingQuery) {
+      sendBtn.classList.add('processing');
+    } else {
+      sendBtn.classList.remove('processing');
+    }
+  }
+
+  // Estado inicial activo (Verde Tottus vibrante)
+  updateSendButtonState();
+
+  // 2. Enviar mensaje del usuario con candado estricto contra peticiones simultáneas
   async function handleSendMessage(customText = null) {
+    if (isProcessingQuery) return; // Candado absoluto: jamás permitir envíos concurrentes
+
+    const text = customText || (messageInput ? messageInput.value.trim() : '');
+    if (!text) {
+      if (messageInput) messageInput.focus();
+      return;
+    }
+
     // Si no está autenticado, solicitar login inmediatamente
     if (window.authManager && !window.authManager.isAuthenticated()) {
       window.authManager.showAuthModal();
       return;
     }
 
-    const text = customText || messageInput.value.trim();
-    if (!text) return;
-
-    // Bloquear input mientras procesa
-    messageInput.value = '';
-    messageInput.disabled = true;
-    sendBtn.disabled = true;
+    // Activar candado y bloquear UI inmediatamente
+    isProcessingQuery = true;
+    updateSendButtonState();
+    if (messageInput) {
+      messageInput.value = '';
+      messageInput.disabled = true;
+    }
 
     // Agregar mensaje del usuario a la pantalla
     window.logisticsUI.addUserMessage(text);
@@ -85,8 +110,9 @@ function initApp() {
       window.logisticsUI.removeTyping(typingId);
       window.logisticsUI.addErrorMessage(err.message || 'Ocurrió un error al procesar la consulta.');
     } finally {
+      isProcessingQuery = false;
       messageInput.disabled = false;
-      sendBtn.disabled = false;
+      updateSendButtonState();
       messageInput.focus();
     }
   }
@@ -100,7 +126,9 @@ function initApp() {
     messageInput.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' && !e.shiftKey) {
         e.preventDefault();
-        handleSendMessage();
+        if (!isProcessingQuery && messageInput.value.trim().length > 0) {
+          handleSendMessage();
+        }
       }
     });
   }

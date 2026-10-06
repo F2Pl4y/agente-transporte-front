@@ -118,7 +118,8 @@ class AuthManager {
       msgInput.placeholder = 'Inicia sesión con tu cuenta corporativa para consultar...';
     }
     if (sendBtn) {
-      sendBtn.disabled = true;
+      sendBtn.disabled = false;
+      sendBtn.classList.remove('processing');
     }
     this.renderUserProfile();
     this.showAuthModal();
@@ -180,7 +181,8 @@ class AuthManager {
         msgInput.placeholder = 'Inicia sesión con tu cuenta corporativa para consultar...';
       }
       if (sendBtn) {
-        sendBtn.disabled = true;
+        sendBtn.disabled = false;
+        sendBtn.classList.remove('processing');
       }
     }
 

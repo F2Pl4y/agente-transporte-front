@@ -912,27 +912,37 @@ textarea {
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
   flex-shrink: 0;
-  box-shadow: 0 4px 12px var(--tottus-green-glow);
-  transition: all 0.22s var(--ios-spring);
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 133, 63, 0.45);
+  transition: all 0.25s var(--ios-spring);
+  opacity: 1;
 }
 
-.ios-send-btn:hover:not(:disabled) {
+.ios-send-btn:hover:not(:disabled):not(.processing) {
   background: var(--tottus-gradient-hover);
-  transform: scale(1.06);
-  box-shadow: 0 6px 16px rgba(0, 133, 63, 0.4);
+  transform: scale(1.08);
+  box-shadow: 0 6px 18px rgba(0, 133, 63, 0.55);
 }
 
-.ios-send-btn:active:not(:disabled) {
+.ios-send-btn:active:not(:disabled):not(.processing) {
   transform: scale(0.92);
 }
 
-.ios-send-btn:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
-  transform: none;
-  box-shadow: none;
+/* Estado bloqueado SOLO cuando hay una consulta en camino */
+.ios-send-btn:disabled,
+.ios-send-btn.processing {
+  opacity: 0.45 !important;
+  background: #a1a1aa !important;
+  color: #ffffff !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.ios-text-input:disabled {
+  opacity: 0.65;
+  cursor: wait;
 }
 
 .ios-send-btn svg {

@@ -105,9 +105,7 @@ class LogisticsAPI {
       const response = await fetch(`${this.baseUrl}/api/health`, {
         method: 'GET',
         headers: {
-          'Accept': 'application/json',
-          'ngrok-skip-browser-warning': 'true',
-          'X-Tunnel-Skip-AntiPhishing-Page': 'true'
+          'Accept': 'application/json'
         },
         signal: controller.signal
       });
@@ -160,9 +158,7 @@ class LogisticsAPI {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Accept': 'application/json',
-          'ngrok-skip-browser-warning': 'true',
-          'X-Tunnel-Skip-AntiPhishing-Page': 'true'
+          'Accept': 'application/json'
         },
         body: JSON.stringify({ email: email.trim(), key: key.trim() }),
         signal: controller.signal
@@ -173,7 +169,15 @@ class LogisticsAPI {
         let detail = 'Error de autenticación.';
         try {
           const errData = await response.json();
-          if (errData && errData.detail) detail = errData.detail;
+          if (errData && errData.detail) {
+            if (typeof errData.detail === 'string') {
+              detail = errData.detail;
+            } else if (Array.isArray(errData.detail) && errData.detail[0] && errData.detail[0].msg) {
+              detail = errData.detail[0].msg;
+            } else {
+              detail = JSON.stringify(errData.detail);
+            }
+          }
         } catch (e) {}
         throw new Error(detail);
       }
@@ -217,9 +221,7 @@ class LogisticsAPI {
 
     const headers = {
       'Content-Type': 'application/json',
-      'Accept': 'application/json',
-      'ngrok-skip-browser-warning': 'true',
-      'X-Tunnel-Skip-AntiPhishing-Page': 'true'
+      'Accept': 'application/json'
     };
     if (authToken) {
       headers['Authorization'] = `Bearer ${authToken}`;
@@ -250,6 +252,14 @@ class LogisticsAPI {
             window.authManager.logout();
             window.authManager.showError(errorDetail);
           }
+          throw new Error(errorDetail);
+        }
+        if (response.status === 429) {
+          let errorDetail = 'Ya hay una consulta procesándose para esta sesión activa. Por favor, espera a que finalice.';
+          try {
+            const errData = await response.json();
+            if (errData && errData.detail) errorDetail = errData.detail;
+          } catch (e) {}
           throw new Error(errorDetail);
         }
         if (response.status === 504) {
