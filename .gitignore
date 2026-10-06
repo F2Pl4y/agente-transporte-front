@@ -1,0 +1,14 @@
+# Archivos temporales y de sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs y caches
+*.log
+.cache/
+
+# Entornos y dependencias (si se agrega Node.js en el futuro)
+node_modules/
+dist/
+.env
+.env.local

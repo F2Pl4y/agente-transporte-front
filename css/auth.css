@@ -1,0 +1,386 @@
+/* ==========================================================================
+   MÓDULO DE AUTENTICACIÓN CORPORATIVA — TOTTUS PERÚ (@tottus.com.pe)
+   Estilo Frosted Glass iOS + Google Identity Services
+   ========================================================================== */
+
+/* Overlay de Bloqueo de Pantalla */
+.auth-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(18, 22, 28, 0.45);
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  padding: 1.25rem;
+  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.35s;
+}
+
+.auth-overlay.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Tarjeta Principal de Autenticación */
+.auth-card {
+  width: 100%;
+  max-width: 440px;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 28px;
+  box-shadow: 
+    0 24px 60px -12px rgba(0, 0, 0, 0.18),
+    0 0 0 1px rgba(0, 0, 0, 0.04),
+    0 8px 20px -4px rgba(0, 133, 63, 0.12);
+  padding: 2.25rem 2rem 2rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  animation: authSlideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes authSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Ícono Corporativo de Encabezado */
+.auth-brand-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 58px;
+  height: 58px;
+  background: linear-gradient(135deg, #009e4a 0%, #007737 100%);
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 22px;
+  letter-spacing: -0.02em;
+  border-radius: 18px;
+  box-shadow: 0 10px 24px -4px rgba(0, 157, 74, 0.45);
+  margin-bottom: 1.25rem;
+}
+
+.auth-title {
+  font-size: 21px;
+  font-weight: 700;
+  color: #1d1d1f;
+  letter-spacing: -0.02em;
+  margin-bottom: 6px;
+}
+
+.auth-subtitle {
+  font-size: 13.5px;
+  color: #6e6e73;
+  line-height: 1.45;
+  margin-bottom: 1.5rem;
+  padding: 0 0.5rem;
+}
+
+.auth-domain-highlight {
+  color: #00853f;
+  font-weight: 650;
+  background: #e8f7ee;
+  padding: 2px 7px;
+  border-radius: 6px;
+  display: inline-block;
+}
+
+/* Contenedor del Botón de Google */
+.auth-google-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  margin-bottom: 1rem;
+}
+
+/* Separador Elegante */
+.auth-divider {
+  display: flex;
+  align-items: center;
+  margin: 1.25rem 0;
+  color: #86868b;
+  font-size: 11.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: rgba(60, 60, 67, 0.12);
+}
+
+.auth-divider span {
+  padding: 0 10px;
+}
+
+/* Formulario de Entrada Rápida de Correo */
+.auth-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 1.25rem;
+  text-align: left;
+}
+
+.auth-input-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #3a3a3c;
+  padding-left: 4px;
+}
+
+.auth-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.auth-email-input {
+  width: 100%;
+  height: 46px;
+  padding: 0 14px 0 38px;
+  border: 1.5px solid rgba(60, 60, 67, 0.18);
+  border-radius: 14px;
+  font-size: 14px;
+  color: #1d1d1f;
+  background: #fbfbfd;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.auth-email-input:focus {
+  outline: none;
+  border-color: #00853f;
+  background: #ffffff;
+  box-shadow: 0 0 0 4px rgba(0, 133, 63, 0.14);
+}
+
+.auth-input-icon {
+  position: absolute;
+  left: 12px;
+  width: 18px;
+  height: 18px;
+  color: #86868b;
+  pointer-events: none;
+}
+
+.auth-pwd-toggle-btn {
+  position: absolute;
+  right: 10px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #86868b;
+  transition: all 0.2s ease;
+}
+
+.auth-pwd-toggle-btn:hover {
+  color: #1d1d1f;
+  background: rgba(0, 0, 0, 0.05);
+}
+
+/* Botón de Validación */
+.auth-submit-btn {
+  width: 100%;
+  height: 46px;
+  border: none;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #009e4a 0%, #007737 100%);
+  color: #ffffff;
+  font-size: 14.5px;
+  font-weight: 650;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 133, 63, 0.32);
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: inherit;
+}
+
+.auth-submit-btn:hover {
+  background: linear-gradient(135deg, #00ad52 0%, #00823c 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(0, 133, 63, 0.4);
+}
+
+.auth-submit-btn:active {
+  transform: scale(0.98);
+}
+
+/* Caja de Mensaje de Error (Acceso Denegado) */
+.auth-error-banner {
+  display: none;
+  background: #fff2f2;
+  border: 1px solid #ffd4d4;
+  border-radius: 12px;
+  padding: 10px 14px;
+  color: #c92a2a;
+  font-size: 12.5px;
+  line-height: 1.4;
+  margin-top: 1rem;
+  text-align: left;
+  animation: authShake 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+.auth-error-banner.visible {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+@keyframes authShake {
+  10%, 90% { transform: translate3d(-1px, 0, 0); }
+  20%, 80% { transform: translate3d(2px, 0, 0); }
+  30%, 50%, 70% { transform: translate3d(-3px, 0, 0); }
+  40%, 60% { transform: translate3d(3px, 0, 0); }
+}
+
+/* Nota de Privacidad en Footer */
+.auth-footer-note {
+  margin-top: 1.25rem;
+  font-size: 11px;
+  color: #86868b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+/* ==========================================================================
+   COMPONENTE EN EL HEADER: PILL DE PERFIL DE USUARIO
+   ========================================================================== */
+.ios-user-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 9999px;
+  padding: 4px 10px 4px 5px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+  font-size: 12.5px;
+  color: #1d1d1f;
+  transition: all 0.2s ease;
+}
+
+.ios-user-pill:hover {
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.ios-user-avatar {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #00853f 0%, #005a2b 100%);
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 1.5px solid #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.ios-user-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ios-user-info {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+  text-align: left;
+}
+
+.ios-user-name {
+  font-weight: 650;
+  font-size: 12px;
+  color: #1d1d1f;
+  max-width: 140px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ios-user-email {
+  font-size: 10.5px;
+  color: #00853f;
+  font-weight: 500;
+  max-width: 140px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ios-logout-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #86868b;
+  transition: all 0.15s ease;
+  margin-left: 2px;
+}
+
+.ios-logout-btn:hover {
+  color: #c92a2a;
+  background: rgba(201, 42, 42, 0.08);
+}
+
+/* Modal de Configuración de Servidor / Dev Tunnel */
+.network-settings-btn {
+  background: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+  font-size: 11px;
+  color: #6e6e73;
+  padding: 4px 8px;
+  cursor: pointer;
+  margin-top: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.2s ease;
+}
+
+.network-settings-btn:hover {
+  background: rgba(0, 0, 0, 0.04);
+  color: #1d1d1f;
+}

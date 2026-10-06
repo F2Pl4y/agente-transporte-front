@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Asistente de Transporte — Tottus Perú</title>
+
+  <!-- Google Fonts: Inter como fallback de alta precisión para SF Pro -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Favicon Tottus Perú (SVG y Data URI embebido para evitar error 404 en Live Server y file://) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='25' fill='%2300843D'/%3E%3Ctext x='50%25' y='55%25' font-family='Arial,sans-serif' font-weight='bold' font-size='50' fill='white' dominant-baseline='middle' text-anchor='middle'%3ETP%3C/text%3E%3C/svg%3E">
+  <link rel="alternate icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=">
+
+  <!-- Marked.js local para formateo Markdown (100% local, sin advertencias de Tracking Prevention en Edge y compatible offline / file://) -->
+  <script src="js/marked.min.js"></script>
+
+  <!-- SheetJS para generación y descarga nativa de libros Excel (.xlsx) -->
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+
+  <!-- Google Identity Services para Login Corporativo con Google OAuth -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+  <!-- Sistema de Diseño Apple iOS + Tottus (100% CSS Nativo, sin Tailwind) -->
+  <link rel="stylesheet" href="css/custom.css?v=2.7">
+  <!-- Módulo de Autenticación y Control de Acceso @tottus.com.pe -->
+  <link rel="stylesheet" href="css/auth.css">
+</head>
+
+<body>
+
+  <div class="app-container">
+
+    <!-- ========================================================================= -->
+    <!-- CABECERA FROSTED GLASS (iOS Navigation Bar)                               -->
+    <!-- ========================================================================= -->
+    <header class="ios-header">
+      <div class="ios-header-content">
+
+        <!-- Marca y Avatar Estilo App iOS -->
+        <div class="ios-brand">
+          <div class="ios-app-icon">TP</div>
+          <div class="ios-title-wrap">
+            <div class="ios-title-row">
+              <h1 class="ios-title">Asistente de Transporte</h1>
+              <span class="ios-badge-pill">🇵🇪 Perú</span>
+            </div>
+            <span class="ios-subtitle">Centro de Distribución ➔ Tiendas Tottus</span>
+          </div>
+        </div>
+
+        <!-- Controles de Navegación (Segmented Pill + Status) -->
+        <div class="ios-header-controls">
+
+          <!-- Indicador Live Activity de Conexión -->
+          <div id="connection-status">
+            <span class="ios-status-pill">
+              <span class="ios-status-dot"></span>
+              Conectando...
+            </span>
+          </div>
+
+          <!-- Perfil de Usuario Autenticado (@tottus.com.pe) -->
+          <div id="user-profile-container"></div>
+
+          <!-- Botón de Reinicio Rápido -->
+          <button id="reset-chat-btn" title="Nueva conversación" class="ios-icon-btn">
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+            </svg>
+          </button>
+
+          <!-- Botón de Gobernanza y Auditoría Centralizada -->
+          <button id="open-audit-btn" title="Gobernanza y Bitácora de Consultas" class="ios-icon-btn">
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+            </svg>
+          </button>
+
+        </div>
+
+      </div>
+    </header>
+
+    <!-- ========================================================================= -->
+    <!-- ÁREA PRINCIPAL DE CHAT                                                    -->
+    <!-- ========================================================================= -->
+    <main class="ios-chat-main">
+
+      <!-- Contenedor de Mensajes con Scroll Suave -->
+      <div id="chat-messages" class="ios-messages-scroller">
+
+        <!-- Mensaje de Bienvenida Inicial en Tarjeta Frosted Glass -->
+        <div class="ios-assistant-row animate-fade-in">
+          <div class="ios-avatar-small">TP</div>
+          <div class="ios-assistant-bubble-wrap">
+            <div class="chat-bubble-assistant">
+              <p style="font-weight: 650; font-size: 15.5px; margin-bottom: 6px; letter-spacing: -0.01em;">
+                ¡Hola! Soy tu Asistente de Transporte y Despachos de Tottus Perú 🇵🇪
+              </p>
+              <p style="color: var(--ios-text-secondary); margin-bottom: 8px;">
+                Puedo asistirte en tiempo real con las operaciones del Centro de Distribución y Tiendas:
+              </p>
+              <ul style="margin-left: 1.25rem; font-size: 13.5px; color: var(--ios-text-primary);">
+                <li><strong>Placa del camión y transporte asignado:</strong> para cualquier número de TIM o guía.</li>
+                <li><strong>Consolidado de carga:</strong> Total de cajas, pallets, bultos y peso en kilogramos.</li>
+                <li><strong>Detalle de mercadería:</strong> SKUs y productos enviados a cada tienda.</li>
+                <li><strong>Control preventivo:</strong> Artículos perecibles con vencimiento próximo en ruta.</li>
+              </ul>
+              <p style="font-size: 12.5px; color: var(--ios-text-secondary); margin-top: 10px;">
+                💡 <em>Escribe tu consulta abajo o selecciona una de las sugerencias rápidas.</em>
+              </p>
+            </div>
+            <div class="ios-msg-timestamp-assistant">Asistente Logístico Tottus • Sesión iniciada</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ======================================================================= -->
+      <!-- CHIPS DE SUGERENCIAS RÁPIDAS (iOS Capsule Buttons)                      -->
+      <!-- ======================================================================= -->
+      <div class="ios-suggestions-bar">
+        <div class="ios-chips-scroller">
+          <span class="ios-chips-label">Atajos:</span>
+          <button class="suggestion-chip" data-query="¿Qué camión llevó la TIM 123456?">
+            🚛 Camión del TIM 123456
+          </button>
+          <button class="suggestion-chip" data-query="Lista de productos del TIM 123456">
+            📦 Productos TIM 123456
+          </button>
+          <button class="suggestion-chip" data-query="Quiero realizar una reprogramacion">
+            🔄 Reprogramaciones
+          </button>
+          <button id="chip-angamos" class="suggestion-chip" data-query="quiero saber cuantos camiones se han ido a la tienda de angamos ayer">
+            🏪 Camiones a Angamos ayer
+          </button>
+        </div>
+      </div>
+
+      <!-- ======================================================================= -->
+      <!-- BARRA DE ENTRADA FLOTANTE (iOS Capsule / Dynamic Island)               -->
+      <!-- ======================================================================= -->
+      <div class="ios-input-capsule">
+
+        <div class="ios-input-row">
+          <input id="message-input" type="text" placeholder="Pregunta por un TIM, camión, o tienda y fecha (ej. camiones a Atocongo el 03.10)..." class="ios-text-input" autocomplete="off" />
+
+          <button id="send-btn" class="ios-send-btn" title="Enviar mensaje">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </button>
+        </div>
+
+        <!-- Opciones Inferiores con Switch iOS -->
+        <div class="ios-input-footer">
+          <label class="ios-toggle-label">
+            <span class="ios-switch">
+              <input type="checkbox" id="include-data-checkbox" checked>
+              <span class="ios-slider"></span>
+            </span>
+            <span>Generar tabla detallada para exportar a Excel</span>
+          </label>
+
+          <span class="ios-hint">Presiona Enter para enviar</span>
+        </div>
+
+      </div>
+
+    </main>
+
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- MODAL DE AUTENTICACIÓN Y CONTROL DE ACCESO CORPORATIVO (@tottus.com.pe)   -->
+  <!-- ========================================================================= -->
+  <div id="auth-overlay" class="auth-overlay hidden">
+    <div class="auth-card">
+
+      <div class="auth-brand-badge">TP</div>
+
+      <h2 class="auth-title">Asistente de Transporte</h2>
+      <p class="auth-subtitle">
+        Acceso exclusivo para colaboradores de Tottus Perú.<br>
+        Identifícate con tu cuenta corporativa <span class="auth-domain-highlight">@tottus.com.pe</span>
+      </p>
+
+      <!-- Contenedor dinámico de Google Identity (se activa automáticamente al configurar Client ID) -->
+      <div id="auth-google-wrapper" class="auth-google-section" style="display: none;">
+        <div id="g_id_signin_container"></div>
+        <div class="auth-divider">
+          <span>O CON CLAVE DE ACCESO DEL PILOTO</span>
+        </div>
+      </div>
+
+      <!-- Formulario de Acceso Seguro (Correo Tottus + Clave del Piloto) -->
+      <form id="auth-direct-form" autocomplete="on">
+        <div class="auth-input-group">
+          <label for="auth-email-input" class="auth-input-label">Correo institucional:</label>
+          <div class="auth-input-wrapper">
+            <svg class="auth-input-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
+            </svg>
+            <input id="auth-email-input" type="email" placeholder="nombre.apellido@tottus.com.pe" class="auth-email-input" required />
+          </div>
+        </div>
+
+        <div class="auth-input-group" style="margin-top: 10px;">
+          <label for="auth-password-input" class="auth-input-label">Clave de acceso del piloto:</label>
+          <div class="auth-input-wrapper">
+            <svg class="auth-input-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+            </svg>
+            <input id="auth-password-input" type="password" placeholder="Ingresa la clave del piloto..." class="auth-email-input" style="padding-right: 42px;" required />
+            <button type="button" id="auth-toggle-pwd-btn" class="auth-pwd-toggle-btn" title="Mostrar/ocultar clave">
+              <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <button type="submit" class="auth-submit-btn" style="margin-top: 14px;">
+          <span>Acceder al Asistente</span>
+          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </button>
+      </form>
+
+      <!-- Banner de Error -->
+      <div id="auth-error-banner" class="auth-error-banner">
+        <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="flex-shrink: 0; margin-top: 1px;">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+        </svg>
+        <div id="auth-error-text"></div>
+      </div>
+
+      <!-- Opciones de Configuración para Pruebas Remotas -->
+      <div style="margin-top: 1.25rem; display: flex; justify-content: center; gap: 8px;">
+        <button id="auth-config-api-btn" type="button" class="network-settings-btn" title="Configurar URL del servidor para pruebas en remoto">
+          🌐 Servidor Backend
+        </button>
+        <button id="auth-config-client-btn" type="button" class="network-settings-btn" title="Configurar Google Client ID de GCP">
+          ⚙️ Google Client ID
+        </button>
+      </div>
+
+      <div class="auth-footer-note">
+        <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+        </svg>
+        <span>Acceso seguro protegido bajo normativas Tottus Perú</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- MODAL DE GOBERNANZA Y AUDITORÍA DE CONSULTAS                              -->
+  <!-- ========================================================================= -->
+  <div id="audit-overlay" class="auth-overlay hidden">
+    <div class="auth-card" style="max-width: 960px; width: 94%; max-height: 88vh; display: flex; flex-direction: column; text-align: left; padding: 1.5rem 1.75rem;">
+
+      <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--ios-divider); padding-bottom: 12px; margin-bottom: 14px;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <div class="auth-brand-badge" style="width: 38px; height: 38px; font-size: 16px; margin: 0;">🛡️</div>
+          <div>
+            <h2 style="font-size: 17px; font-weight: 700; color: var(--ios-text-primary); margin: 0;">Gobernanza y Bitácora de Consultas</h2>
+            <p style="font-size: 12px; color: var(--ios-text-secondary); margin: 2px 0 0;">Historial cronológico de preguntas realizadas por todos los colaboradores.</p>
+          </div>
+        </div>
+        <button id="close-audit-btn" type="button" class="ios-icon-btn" title="Cerrar panel" style="width: 32px; height: 32px; font-size: 16px;">
+          ✕
+        </button>
+      </div>
+
+      <!-- Barra de Filtros y Búsqueda -->
+      <div style="display: flex; gap: 10px; margin-bottom: 12px; align-items: center;">
+        <div style="flex: 1; position: relative;">
+          <input id="audit-search-input" type="text" placeholder="Filtrar por usuario, prompt o palabra clave..." class="auth-email-input" style="font-size: 13px; padding: 8px 12px 8px 34px; width: 100%;">
+          <svg style="position: absolute; left: 10px; top: 10px; width: 16px; height: 16px; color: var(--ios-text-tertiary);" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+        </div>
+        <button id="audit-refresh-btn" type="button" class="network-settings-btn" style="margin: 0; padding: 8px 14px; font-size: 12px; font-weight: 600;">
+          🔄 Actualizar
+        </button>
+      </div>
+
+      <!-- Tabla de Auditoría con Scroll -->
+      <div id="audit-table-wrap" style="flex: 1; overflow-y: auto; overflow-x: auto; border: 1px solid var(--ios-divider); border-radius: 12px; background: #fff; max-height: 55vh;">
+        <div style="padding: 30px; text-align: center; color: var(--ios-text-secondary); font-size: 13px;">Cargando bitácora de auditoría...</div>
+      </div>
+
+      <div style="margin-top: 12px; display: flex; justify-content: space-between; align-items: center; font-size: 11.5px; color: var(--ios-text-tertiary);">
+        <span id="audit-total-count">0 consultas registradas</span>
+        <span>Bitácora centralizada de trazabilidad y gobernanza</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Scripts de la Aplicación -->
+  <script src="js/auth.js?v=2.7"></script>
+  <script src="js/api.js?v=2.7"></script>
+  <script src="js/ui.js?v=2.7"></script>
+  <script src="js/app.js?v=2.7"></script>
+
+</body>
+
+</html>
