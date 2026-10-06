@@ -3,7 +3,7 @@
  * Conecta los eventos de usuario con la API y el Renderizador UI.
  */
 
-document.addEventListener('DOMContentLoaded', () => {
+function initApp() {
   const messageInput = document.getElementById('message-input');
   const sendBtn = document.getElementById('send-btn');
   const storeSelect = document.getElementById('store-select');
@@ -16,34 +16,31 @@ document.addEventListener('DOMContentLoaded', () => {
     window.authManager.init();
   }
 
-  // 1. Verificación inicial de conectividad con el backend
+  // 1. Verificación de conectividad con el backend
   const connectionBadge = document.getElementById('connection-status');
   if (connectionBadge) {
-    connectionBadge.style.cursor = 'pointer';
     connectionBadge.addEventListener('click', () => {
-      const current = window.logisticsAPI.baseUrl || 'http://localhost:8000';
-      const nuevaUrl = prompt(
-        '🔗 CONFIGURACIÓN DE TÚNEL / SERVIDOR BACKEND:\n' +
-        'Si estás usando GitHub Pages, ingresa aquí tu URL pública HTTPS (ej. Cloudflare Tunnel o VS Code Dev Tunnels):\n' +
-        'Ejemplo: https://xyz-8000.use.devtunnels.ms o https://random.trycloudflare.com\n\n' +
-        'URL actual:',
-        current
-      );
-      if (nuevaUrl !== null) {
-        const limpia = nuevaUrl.trim().replace(/\/+$/, '') || 'http://localhost:8000';
-        window.logisticsAPI.setBaseUrl(limpia);
-        checkBackendHealth();
-      }
+      checkBackendHealth();
     });
   }
 
-  checkBackendHealth();
-  setInterval(checkBackendHealth, 30000); // Re-verificar cada 30 segundos
-
+  let consecutiveFailures = 0;
   async function checkBackendHealth() {
     const isOnline = await window.logisticsAPI.checkHealth();
-    window.logisticsUI.updateConnectionStatus(isOnline);
+    if (isOnline) {
+      consecutiveFailures = 0;
+      window.logisticsUI.updateConnectionStatus(true);
+    } else {
+      consecutiveFailures++;
+      // Solo marcar desconectado tras 2 fallos consecutivos reales para evitar falsos parpadeos por latencia
+      if (consecutiveFailures >= 2) {
+        window.logisticsUI.updateConnectionStatus(false);
+      }
+    }
   }
+
+  checkBackendHealth();
+  setInterval(checkBackendHealth, 30000); // Re-verificar periódicamente
 
   // 2. Enviar mensaje del usuario
   async function handleSendMessage(customText = null) {
@@ -248,4 +245,11 @@ document.addEventListener('DOMContentLoaded', () => {
       renderAuditTable(filtered);
     });
   }
-});
+}
+
+// Inicialización segura sin bloqueos
+if (document.readyState !== 'loading') {
+  initApp();
+} else {
+  document.addEventListener('DOMContentLoaded', initApp);
+}

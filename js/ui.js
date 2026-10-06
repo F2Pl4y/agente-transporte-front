@@ -103,7 +103,7 @@ class LogisticsUI {
         <div class="ios-assistant-bubble-wrap">
           <div class="chat-bubble-assistant">
             <div style="display: flex; align-items: center; gap: 8px; color: var(--ios-text-secondary); font-size: 13px;">
-              <span>Consultando registros oficiales...</span>
+              <span id="${id}-text">Consultando registros oficiales...</span>
               <div class="dot-typing">
                 <span></span>
                 <span></span>
@@ -116,10 +116,37 @@ class LogisticsUI {
     `;
     this.chatContainer.insertAdjacentHTML('beforeend', typingHtml);
     this.scrollToBottom();
+
+    // Actualizaciones progresivas para consultas analíticas de BigQuery y síntesis de IA
+    const steps = [
+      { delay: 2600, text: 'Buscando datos y despachos en BigQuery...' },
+      { delay: 5800, text: 'Calculando camiones, transferencias y pesos...' },
+      { delay: 9200, text: 'Sintetizando informe ejecutivo con Gemini...' }
+    ];
+
+    if (!this._typingTimers) {
+      this._typingTimers = {};
+    }
+    this._typingTimers[id] = [];
+
+    steps.forEach(step => {
+      const timer = setTimeout(() => {
+        const textSpan = document.getElementById(`${id}-text`);
+        if (textSpan) {
+          textSpan.textContent = step.text;
+        }
+      }, step.delay);
+      this._typingTimers[id].push(timer);
+    });
+
     return id;
   }
 
   removeTyping(id) {
+    if (this._typingTimers && this._typingTimers[id]) {
+      this._typingTimers[id].forEach(timer => clearTimeout(timer));
+      delete this._typingTimers[id];
+    }
     const elem = document.getElementById(id);
     if (elem) elem.remove();
   }

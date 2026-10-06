@@ -6,28 +6,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Asistente de Transporte — Tottus Perú</title>
 
-  <!-- Google Fonts: Inter como fallback de alta precisión para SF Pro -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
   <!-- Favicon Tottus Perú (SVG y Data URI embebido para evitar error 404 en Live Server y file://) -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='25' fill='%2300843D'/%3E%3Ctext x='50%25' y='55%25' font-family='Arial,sans-serif' font-weight='bold' font-size='50' fill='white' dominant-baseline='middle' text-anchor='middle'%3ETP%3C/text%3E%3C/svg%3E">
   <link rel="alternate icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=">
 
-  <!-- Marked.js local para formateo Markdown (100% local, sin advertencias de Tracking Prevention en Edge y compatible offline / file://) -->
-  <script src="js/marked.min.js"></script>
-
-  <!-- SheetJS para generación y descarga nativa de libros Excel (.xlsx) -->
-  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
-
-  <!-- Google Identity Services para Login Corporativo con Google OAuth -->
-  <script src="https://accounts.google.com/gsi/client" async defer></script>
-
-  <!-- Sistema de Diseño Apple iOS + Tottus (100% CSS Nativo, sin Tailwind) -->
-  <link rel="stylesheet" href="css/custom.css?v=2.7">
+  <!-- Sistema de Diseño Apple iOS + Tottus (100% CSS Nativo, sin dependencias externas) -->
+  <link rel="stylesheet" href="css/custom.css?v=3.0">
   <!-- Módulo de Autenticación y Control de Acceso @tottus.com.pe -->
-  <link rel="stylesheet" href="css/auth.css">
+  <link rel="stylesheet" href="css/auth.css?v=3.0">
 </head>
 
 <body>
@@ -91,34 +77,7 @@
     <main class="ios-chat-main">
 
       <!-- Contenedor de Mensajes con Scroll Suave -->
-      <div id="chat-messages" class="ios-messages-scroller">
-
-        <!-- Mensaje de Bienvenida Inicial en Tarjeta Frosted Glass -->
-        <div class="ios-assistant-row animate-fade-in">
-          <div class="ios-avatar-small">TP</div>
-          <div class="ios-assistant-bubble-wrap">
-            <div class="chat-bubble-assistant">
-              <p style="font-weight: 650; font-size: 15.5px; margin-bottom: 6px; letter-spacing: -0.01em;">
-                ¡Hola! Soy tu Asistente de Transporte y Despachos de Tottus Perú 🇵🇪
-              </p>
-              <p style="color: var(--ios-text-secondary); margin-bottom: 8px;">
-                Puedo asistirte en tiempo real con las operaciones del Centro de Distribución y Tiendas:
-              </p>
-              <ul style="margin-left: 1.25rem; font-size: 13.5px; color: var(--ios-text-primary);">
-                <li><strong>Placa del camión y transporte asignado:</strong> para cualquier número de TIM o guía.</li>
-                <li><strong>Consolidado de carga:</strong> Total de cajas, pallets, bultos y peso en kilogramos.</li>
-                <li><strong>Detalle de mercadería:</strong> SKUs y productos enviados a cada tienda.</li>
-                <li><strong>Control preventivo:</strong> Artículos perecibles con vencimiento próximo en ruta.</li>
-              </ul>
-              <p style="font-size: 12.5px; color: var(--ios-text-secondary); margin-top: 10px;">
-                💡 <em>Escribe tu consulta abajo o selecciona una de las sugerencias rápidas.</em>
-              </p>
-            </div>
-            <div class="ios-msg-timestamp-assistant">Asistente Logístico Tottus • Sesión iniciada</div>
-          </div>
-        </div>
-
-      </div>
+      <div id="chat-messages" class="ios-messages-scroller"></div>
 
       <!-- ======================================================================= -->
       <!-- CHIPS DE SUGERENCIAS RÁPIDAS (iOS Capsule Buttons)                      -->
@@ -147,9 +106,9 @@
       <div class="ios-input-capsule">
 
         <div class="ios-input-row">
-          <input id="message-input" type="text" placeholder="Pregunta por un TIM, camión, o tienda y fecha (ej. camiones a Atocongo el 03.10)..." class="ios-text-input" autocomplete="off" />
+          <input id="message-input" type="text" placeholder="Inicia sesión con tu cuenta corporativa para consultar..." class="ios-text-input" autocomplete="off" disabled />
 
-          <button id="send-btn" class="ios-send-btn" title="Enviar mensaje">
+          <button id="send-btn" class="ios-send-btn" title="Enviar mensaje" disabled>
             <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
             </svg>
@@ -178,7 +137,7 @@
   <!-- ========================================================================= -->
   <!-- MODAL DE AUTENTICACIÓN Y CONTROL DE ACCESO CORPORATIVO (@tottus.com.pe)   -->
   <!-- ========================================================================= -->
-  <div id="auth-overlay" class="auth-overlay hidden">
+  <div id="auth-overlay" class="auth-overlay">
     <div class="auth-card">
 
       <div class="auth-brand-badge">TP</div>
@@ -298,12 +257,12 @@
     </div>
   </div>
 
-  <!-- Scripts de la Aplicación -->
-  <script src="js/auth.js?v=2.7"></script>
-  <script src="js/api.js?v=2.7"></script>
-  <script src="js/ui.js?v=2.7"></script>
-  <script src="js/app.js?v=2.7"></script>
-
+  <!-- Scripts de la Aplicación (100% locales, carga ultrarrápida sin dependencias externas) -->
+  <script src="js/marked.min.js"></script>
+  <script src="js/ui.js?v=3.3"></script>
+  <script src="js/api.js?v=3.3"></script>
+  <script src="js/auth.js?v=3.3"></script>
+  <script src="js/app.js?v=3.3"></script>
 </body>
 
 </html>

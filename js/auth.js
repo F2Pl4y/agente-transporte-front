@@ -108,9 +108,17 @@ class AuthManager {
     if (window.logisticsAPI && typeof window.logisticsAPI.resetSession === 'function') {
       window.logisticsAPI.resetSession();
     }
-    // Limpiar mensajes en pantalla al cerrar sesión
-    if (window.logisticsUI && typeof window.logisticsUI.resetChatUI === 'function') {
-      window.logisticsUI.resetChatUI('Sesión cerrada');
+    const chat = document.getElementById('chat-messages');
+    if (chat) chat.innerHTML = '';
+    const msgInput = document.getElementById('message-input');
+    const sendBtn = document.getElementById('send-btn');
+    if (msgInput) {
+      msgInput.disabled = true;
+      msgInput.value = '';
+      msgInput.placeholder = 'Inicia sesión con tu cuenta corporativa para consultar...';
+    }
+    if (sendBtn) {
+      sendBtn.disabled = true;
     }
     this.renderUserProfile();
     this.showAuthModal();
@@ -148,35 +156,67 @@ class AuthManager {
     if (this.isAuthenticated()) {
       this.hideAuthModal();
       this.renderUserProfile();
+      if (window.logisticsUI && typeof window.logisticsUI.resetChatUI === 'function') {
+        window.logisticsUI.resetChatUI(`Sesión iniciada como ${this.currentUser.email}`);
+      }
+      const msgInput = document.getElementById('message-input');
+      const sendBtn = document.getElementById('send-btn');
+      if (msgInput) {
+        msgInput.disabled = false;
+        msgInput.placeholder = 'Pregunta por un TIM, camión, o tienda y fecha (ej. camiones a Atocongo el 03.10)...';
+      }
+      if (sendBtn) {
+        sendBtn.disabled = false;
+      }
     } else {
       this.showAuthModal();
       this.renderUserProfile();
+      const chat = document.getElementById('chat-messages');
+      if (chat) chat.innerHTML = '';
+      const msgInput = document.getElementById('message-input');
+      const sendBtn = document.getElementById('send-btn');
+      if (msgInput) {
+        msgInput.disabled = true;
+        msgInput.placeholder = 'Inicia sesión con tu cuenta corporativa para consultar...';
+      }
+      if (sendBtn) {
+        sendBtn.disabled = true;
+      }
     }
 
     this.initGoogleIdentity();
   }
 
   /**
-   * Inicializa Google Identity Services si está disponible el script
+   * Inicializa Google Identity Services bajo demanda (solo si se configuró un Client ID)
    */
   initGoogleIdentity() {
-    const checkGoogleInterval = setInterval(() => {
-      if (typeof window.google !== 'undefined' && window.google.accounts && window.google.accounts.id) {
-        clearInterval(checkGoogleInterval);
-        this.renderGoogleButton();
-      }
-    }, 200);
+    const wrapper = document.getElementById('auth-google-wrapper');
+    if (!this.googleClientId) {
+      if (wrapper) wrapper.style.display = 'none';
+      return;
+    }
 
-    // Timeout de 6 segundos para no quedar en bucle
-    setTimeout(() => clearInterval(checkGoogleInterval), 6000);
+    // Si ya está disponible la librería global de Google
+    if (typeof window.google !== 'undefined' && window.google.accounts && window.google.accounts.id) {
+      this.renderGoogleButton();
+      return;
+    }
+
+    // Si hay Client ID pero falta la librería, la cargamos dinámicamente sin bloquear el renderizado
+    const script = document.createElement('script');
+    script.src = 'https://accounts.google.com/gsi/client';
+    script.async = true;
+    script.defer = true;
+    script.onload = () => this.renderGoogleButton();
+    document.head.appendChild(script);
   }
 
   renderGoogleButton() {
     const wrapper = document.getElementById('auth-google-wrapper');
     const container = document.getElementById('g_id_signin_container');
-    if (!container || typeof window.google === 'undefined') return;
+    if (!container) return;
 
-    // Solo mostrar sección de Google si hay un Client ID configurado
     if (!this.googleClientId) {
       if (wrapper) wrapper.style.display = 'none';
       return;
@@ -287,6 +327,7 @@ class AuthManager {
           return;
         }
 
+        this.hideError();
         const submitBtn = form.querySelector('button[type="submit"]');
         const originalBtnHtml = submitBtn ? submitBtn.innerHTML : '';
         if (submitBtn) {
@@ -295,7 +336,11 @@ class AuthManager {
         }
 
         try {
+          if (!window.logisticsAPI) {
+            throw new Error('El servicio de conexión aún no está listo. Por favor, reintenta en un segundo.');
+          }
           // 🔒 Validación estricta en tiempo real contra el backend
+          console.log(`[Auth] Validando credenciales para: ${email}`);
           await window.logisticsAPI.verifyAuth(email, password);
 
           // ¡Solo si el servidor aprueba la clave y el correo, se permite el acceso!
@@ -307,6 +352,7 @@ class AuthManager {
             authType: 'pilot_key'
           });
         } catch (err) {
+          console.error('[Auth] Fallo en verificación:', err);
           this.showError(err.message || 'Error al validar credenciales con el servidor.');
           if (passwordInput) {
             passwordInput.value = '';
@@ -446,3 +492,12 @@ class AuthManager {
 
 // Instancia global
 window.authManager = new AuthManager();
+
+// Si los elementos ya existen en el DOM, enlazar eventos de inmediato
+if (document.readyState !== 'loading') {
+  window.authManager.bindEvents();
+} else {
+  document.addEventListener('DOMContentLoaded', () => {
+    window.authManager.bindEvents();
+  });
+}

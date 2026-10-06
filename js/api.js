@@ -10,9 +10,14 @@ function resolveApiBaseUrl() {
     return DEFAULT_API_BASE_URL;
   }
   
-  // 1. Si la web se carga directamente desde Cloudflare Tunnel o la ruta interna /app
+  // 1. Si la web se carga directamente desde ngrok, Cloudflare Tunnel o la ruta interna /app
   // Backend y Frontend están en el mismo dominio (Same-Origin)
-  if (window.location.hostname.endsWith('trycloudflare.com') || window.location.pathname.startsWith('/app')) {
+  if (
+    window.location.hostname.endsWith('ngrok-free.app') ||
+    window.location.hostname.endsWith('ngrok.io') ||
+    window.location.hostname.endsWith('trycloudflare.com') ||
+    window.location.pathname.startsWith('/app')
+  ) {
     return window.location.origin;
   }
 
@@ -95,10 +100,17 @@ class LogisticsAPI {
   async checkHealth() {
     if (!this.baseUrl) return false;
     try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 10000);
       const response = await fetch(`${this.baseUrl}/api/health`, {
         method: 'GET',
-        headers: { 'Accept': 'application/json' }
+        headers: {
+          'Accept': 'application/json',
+          'ngrok-skip-browser-warning': 'true'
+        },
+        signal: controller.signal
       });
+      clearTimeout(timeoutId);
       return response.ok;
     } catch (e) {
       return false;
@@ -114,7 +126,10 @@ class LogisticsAPI {
     try {
       const authUser = (typeof window !== 'undefined' && window.authManager) ? window.authManager.getUser() : null;
       const authToken = (authUser && authUser.token) ? authUser.token : null;
-      const headers = { 'Accept': 'application/json' };
+      const headers = {
+        'Accept': 'application/json',
+        'ngrok-skip-browser-warning': 'true'
+      };
       if (authToken) {
         headers['Authorization'] = `Bearer ${authToken}`;
       }
@@ -136,15 +151,21 @@ class LogisticsAPI {
    * @param {string} key - Clave de acceso del piloto o token
    */
   async verifyAuth(email, key) {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 8000);
     try {
+      console.log(`[Auth] Verificando credenciales en ${this.baseUrl}/api/auth/verify`);
       const response = await fetch(`${this.baseUrl}/api/auth/verify`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Accept': 'application/json'
+          'Accept': 'application/json',
+          'ngrok-skip-browser-warning': 'true'
         },
-        body: JSON.stringify({ email: email.trim(), key: key.trim() })
+        body: JSON.stringify({ email: email.trim(), key: key.trim() }),
+        signal: controller.signal
       });
+      clearTimeout(timeoutId);
 
       if (!response.ok) {
         let detail = 'Error de autenticación.';
@@ -155,8 +176,14 @@ class LogisticsAPI {
         throw new Error(detail);
       }
 
-      return await response.json();
+      const data = await response.json();
+      console.log('[Auth] Verificación exitosa:', data);
+      return data;
     } catch (err) {
+      clearTimeout(timeoutId);
+      if (err.name === 'AbortError') {
+        throw new Error('El servidor tardó más de 8 segundos en responder. Por favor, verifica que Uvicorn esté activo.');
+      }
       if (err.message && err.message.includes('Failed to fetch')) {
         throw new Error('No se pudo conectar con el servidor backend en el puerto 8000. Asegúrate de que el backend esté iniciado.');
       }
@@ -188,7 +215,8 @@ class LogisticsAPI {
 
     const headers = {
       'Content-Type': 'application/json',
-      'Accept': 'application/json'
+      'Accept': 'application/json',
+      'ngrok-skip-browser-warning': 'true'
     };
     if (authToken) {
       headers['Authorization'] = `Bearer ${authToken}`;
@@ -220,6 +248,9 @@ class LogisticsAPI {
             window.authManager.showError(errorDetail);
           }
           throw new Error(errorDetail);
+        }
+        if (response.status === 504) {
+          throw new Error('El túnel de comunicación con la laptop experimentó un tiempo de espera (504 Gateway Timeout). Si estás en la laptop del backend, entra directamente a http://localhost:8000/app/ para estabilidad al 100%.');
         }
         if (response.status === 503) {
           throw new Error('El sistema central se encuentra procesando un volumen alto de consultas. Por favor, reintenta en unos instantes.');
