@@ -106,7 +106,8 @@ class LogisticsAPI {
         method: 'GET',
         headers: {
           'Accept': 'application/json',
-          'ngrok-skip-browser-warning': 'true'
+          'ngrok-skip-browser-warning': 'true',
+          'X-Tunnel-Skip-AntiPhishing-Page': 'true'
         },
         signal: controller.signal
       });
@@ -160,7 +161,8 @@ class LogisticsAPI {
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
-          'ngrok-skip-browser-warning': 'true'
+          'ngrok-skip-browser-warning': 'true',
+          'X-Tunnel-Skip-AntiPhishing-Page': 'true'
         },
         body: JSON.stringify({ email: email.trim(), key: key.trim() }),
         signal: controller.signal
@@ -216,7 +218,8 @@ class LogisticsAPI {
     const headers = {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
-      'ngrok-skip-browser-warning': 'true'
+      'ngrok-skip-browser-warning': 'true',
+      'X-Tunnel-Skip-AntiPhishing-Page': 'true'
     };
     if (authToken) {
       headers['Authorization'] = `Bearer ${authToken}`;
