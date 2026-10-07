@@ -13,6 +13,7 @@ function resolveApiBaseUrl() {
   // 1. Si la web se carga directamente desde ngrok, Cloudflare Tunnel o la ruta interna /app
   // Backend y Frontend están en el mismo dominio (Same-Origin)
   if (
+    window.location.hostname.endsWith('run.app') ||
     window.location.hostname.endsWith('ngrok-free.app') ||
     window.location.hostname.endsWith('ngrok.io') ||
     window.location.hostname.endsWith('trycloudflare.com') ||
