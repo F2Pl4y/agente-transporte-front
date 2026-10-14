@@ -1,50 +1,72 @@
 /* ==========================================================================
-   TOTTUS LOGISTICS ASSISTANT — APPLE / iOS DESIGN SYSTEM
-   Inspirado en iOS Human Interface Guidelines y la identidad de Tottus Perú
+   TOTTUS LOGISTICS ASSISTANT — SISTEMA DE DISEÑO VISUAL CORPORATIVO RETAIL
+   Normativa: diseno-premium-retail (Colores Planos Reales, Sin Degradados)
+   Tipografía: Montserrat (Google Fonts)
    ========================================================================== */
 
 :root {
-  /* Paleta Base Apple iOS */
-  --ios-bg: #f5f6f8;
-  --ios-card: rgba(255, 255, 255, 0.88);
-  --ios-glass: rgba(255, 255, 255, 0.78);
-  --ios-glass-specular: rgba(255, 255, 255, 0.85);
-  --ios-glass-border: rgba(0, 0, 0, 0.06);
-  --ios-divider: rgba(60, 60, 67, 0.12);
-  --ios-fill-tertiary: rgba(118, 118, 128, 0.12);
+  /* ========================================================================
+     1. PALETA DE COLORES PLANOS (CORPORATIVO RETAIL) — Cero Degradados
+     ======================================================================== */
+  --color-primary: #045c34;        /* Verde Corporativo - Botones principales, cabeceras, acentos fuertes */
+  --color-primary-hover: #034627;  /* Verde Corporativo Oscuro para interacción hover */
+  --color-secondary: #66ac24;      /* Verde Manzana - Acentos de éxito, bordes seleccionados */
+  --color-accent: #99c76b;         /* Verde Suave - Detalles secundarios, badges */
+  --color-accent-subtle: #f0f7ec;  /* Verde Muy Tenue - Fondos de badges y filas activas */
+  --color-soft-highlight: #e5e778; /* Amarillo/Lima Suave - Resaltados sutiles y avisos */
+  --color-bg: #f7f8f5;             /* Fondo general de la pantalla, claro y limpio */
+  --color-surface: #ffffff;        /* Fondo de tarjetas, paneles, inputs y modales */
+  --color-surface-subtle: #fcfdfa; /* Fondo alterno para zebra striping de tablas */
+  --color-text-primary: #1f2933;   /* Slate oscuro para texto principal y títulos */
+  --color-text-secondary: #64748b; /* Slate gris para textos secundarios y metadatos */
+  --color-text-tertiary: #94a3b8;  /* Slate claro para placeholders e indicadores tenues */
+  --color-border: #e5e7eb;         /* Gris claro para bordes limpios y delimitadores */
+  --color-border-focus: #045c34;   /* Borde activo para accesibilidad y foco */
 
-  /* Tipografía SF Pro Style */
-  --ios-text-primary: #1d1d1f;
-  --ios-text-secondary: #86868b;
-  --ios-text-tertiary: #a1a1a6;
+  /* Estados Funcionales Planos */
+  --color-success-bg: #eaf5e3;
+  --color-success-text: #045c34;
+  --color-warning-bg: #fef9e7;
+  --color-warning-text: #855d08;
+  --color-error-bg: #fdf2f2;
+  --color-error-text: #b91c1c;
 
-  /* Identidad Corporativa Tottus Perú en clave iOS */
-  --tottus-green: #00853f;
-  --tottus-green-vibrant: #009d4a;
-  --tottus-green-dark: #006e34;
-  --tottus-green-light: #e8f7ee;
-  --tottus-green-glow: rgba(0, 133, 63, 0.28);
-  --tottus-gradient: linear-gradient(135deg, #009e4a 0%, #007737 100%);
-  --tottus-gradient-hover: linear-gradient(135deg, #00ad52 0%, #00823c 100%);
+  /* ========================================================================
+     2. TIPOGRAFÍA CORPORATIVA: MONTSERRAT
+     ======================================================================== */
+  --font-family-base: 'Montserrat', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 
-  /* Sombras y Luces Apple */
-  --ios-shadow-xs: 0 1px 3px rgba(0, 0, 0, 0.04);
-  --ios-shadow-sm: 0 3px 10px rgba(0, 0, 0, 0.04);
-  --ios-shadow-card: 0 4px 24px -2px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.02);
-  --ios-shadow-floating: 0 12px 36px -6px rgba(0, 0, 0, 0.09), 0 0 0 1px rgba(0, 0, 0, 0.04);
+  /* Jerarquía de Tamaños según Skill */
+  --font-size-hero: 2.25rem;       /* 36px - Títulos Portada / Hero */
+  --font-size-title: 1.5rem;       /* 24px - Títulos de Sección */
+  --font-size-subtitle: 1.15rem;   /* 18px - Frases / Destacados */
+  --font-size-body: 0.95rem;       /* 15px - Textos Generales */
+  --font-size-caption: 0.8125rem;  /* 13px - Metadatos, tablas y chips */
+  --font-size-micro: 0.75rem;      /* 12px - Badges y notas al pie */
 
-  /* Radios de Curvatura iOS (Squircles) */
-  --ios-radius-xs: 8px;
-  --ios-radius-sm: 14px;
-  --ios-radius-md: 20px;
-  --ios-radius-lg: 26px;
-  --ios-radius-pill: 9999px;
+  /* Pesos Tipográficos */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
 
-  /* Físicas de Animación Apple (Spring Bezier) */
-  --ios-spring: cubic-bezier(0.16, 1, 0.3, 1);
+  /* ========================================================================
+     3. ESPACIADOS, BORDES Y SOMBRAS LIMPIAS (Sin Exageraciones)
+     ======================================================================== */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-pill: 9999px;
+
+  --shadow-subtle: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.03);
+  --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+  --shadow-dropdown: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
 }
 
-/* Reset y Base Global */
+/* ==========================================================================
+   RESET Y BASE GLOBAL (Colores Planos Reales)
+   ========================================================================== */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -53,338 +75,340 @@
 
 html, body {
   height: 100%;
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, "Helvetica Neue", Inter, sans-serif;
-  color: var(--ios-text-primary);
-  background-color: var(--ios-bg);
-  background-image: 
-    radial-gradient(circle at 12% 8%, rgba(0, 157, 74, 0.05) 0%, transparent 45%),
-    radial-gradient(circle at 88% 92%, rgba(0, 133, 63, 0.04) 0%, transparent 50%),
-    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.5) 0%, transparent 80%);
-  background-attachment: fixed;
+  font-family: var(--font-family-base);
+  font-size: 16px;
+  color: var(--color-text-primary);
+  background-color: var(--color-bg);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.5;
   overflow: hidden;
 }
 
+/* Selección de texto con identidad de marca */
+::selection {
+  background-color: var(--color-accent);
+  color: var(--color-text-primary);
+}
+
 /* ==========================================================================
-   PREVENCIÓN DE CURSOR DE TEXTO (RAYA TIPO WORD) EN LA INTERFAZ
+   PREVENCIÓN DE SELECCIÓN ACCIDENTAL EN ELEMENTOS DE CONTROL
    ========================================================================== */
+.retail-header,
 .ios-header,
-.ios-brand,
-.ios-title-wrap,
-.ios-title-row,
-.ios-badge-pill,
-.ios-status-pill,
-.ios-user-badge,
-.ios-icon-btn,
-.ios-suggestions-bar,
+.retail-brand,
+.retail-title-wrap,
+.retail-badge-pill,
+.retail-kpi-bar,
 .suggestion-chip,
 .ios-chips-label,
 .ios-input-footer,
 .ios-toggle-label,
 .ios-hint,
 .ios-audit-badge,
-.ios-data-header,
 .ios-export-btn,
 .th-row-num,
 .td-row-num,
 table th,
-.ios-msg-timestamp-assistant,
-.ios-msg-timestamp-user,
 .ios-avatar-small,
-.ios-app-icon {
+.retail-app-icon {
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  caret-color: transparent;
-}
-
-/* Mantener interacción ágil en botones y controles */
-button,
-.ios-icon-btn,
-.ios-send-btn,
-.suggestion-chip,
-.ios-export-btn,
-.ios-switch,
-.ios-toggle-label {
-  cursor: pointer !important;
-}
-
-/* El input donde el usuario escribe mantiene su cursor verde Tottus natural */
-input[type="text"],
-textarea {
-  -webkit-user-select: text;
-  -moz-user-select: text;
-  user-select: text;
-  caret-color: var(--tottus-green);
-  cursor: text !important;
-}
-
-/* En las burbujas de mensajes evitar que aparezca la raya de Word al hacer clic */
-.chat-bubble-assistant,
-.chat-bubble-user {
-  caret-color: transparent;
-}
-
-/* Scrollbars iOS discretos y elegantes */
-::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
-}
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.15);
-  border-radius: var(--ios-radius-pill);
-}
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 0, 0, 0.28);
 }
 
 /* ==========================================================================
-   LAYOUT PRINCIPAL (App Container)
+   CONTENEDOR MAESTRO DE LA APLICACIÓN (AppShell)
    ========================================================================== */
 .app-container {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  max-height: 100vh;
-  position: relative;
-}
-
-/* ==========================================================================
-   HEADER / NAVBAR ESTILO iOS FROSTED GLASS
-   ========================================================================== */
-.ios-header {
-  position: sticky;
-  top: 0;
-  z-index: 40;
-  background: var(--ios-glass);
-  backdrop-filter: blur(24px) saturate(180%);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
-  border-bottom: 1px solid var(--ios-glass-border);
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.02);
-  padding: 0 20px;
-  height: 64px;
-  flex-shrink: 0;
-}
-
-.ios-header-content {
-  max-width: 1440px;
   width: 100%;
+  max-width: 1280px;
   margin: 0 auto;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-/* Marca e Ícono App Tottus */
-.ios-brand {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.ios-app-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: var(--ios-radius-sm);
-  background: var(--tottus-gradient);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #ffffff;
-  font-weight: 700;
-  font-size: 15px;
-  letter-spacing: -0.02em;
-  box-shadow: 0 4px 12px var(--tottus-green-glow), inset 0 1px 1px rgba(255, 255, 255, 0.35);
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  background-color: var(--color-surface);
+  border-left: 1px solid var(--color-border);
+  border-right: 1px solid var(--color-border);
+  box-shadow: var(--shadow-subtle);
   position: relative;
   overflow: hidden;
 }
 
-.ios-app-icon::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 50%;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.22) 0%, transparent 100%);
-  pointer-events: none;
+/* ==========================================================================
+   CABECERA EJECUTIVA CORPORATIVA (Header Limpio y Plano)
+   ========================================================================== */
+.retail-header,
+.ios-header {
+  flex-shrink: 0;
+  background-color: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  padding: 0.85rem 1.75rem;
+  z-index: 50;
 }
 
+.retail-header-content,
+.ios-header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+/* Marca Corporativa Tottus */
+.retail-brand,
+.ios-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+}
+
+.retail-app-icon,
+.ios-app-icon {
+  width: 44px;
+  height: 44px;
+  background-color: var(--color-primary);
+  color: #ffffff;
+  font-size: 1.15rem;
+  font-weight: var(--font-weight-extrabold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  letter-spacing: -0.02em;
+  flex-shrink: 0;
+}
+
+.retail-title-wrap,
 .ios-title-wrap {
   display: flex;
   flex-direction: column;
 }
 
+.retail-title-row,
 .ios-title-row {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 0.65rem;
 }
 
+.retail-title,
 .ios-title {
-  font-size: 16px;
-  font-weight: 700;
+  font-size: 1.35rem; /* ~22px proporción limpia */
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
   letter-spacing: -0.02em;
-  color: var(--ios-text-primary);
+  margin: 0;
+  line-height: 1.25;
 }
 
+.retail-badge-pill,
 .ios-badge-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
+  font-size: var(--font-size-micro);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-primary);
+  background-color: var(--color-accent-subtle);
+  border: 1px solid var(--color-accent);
   padding: 2px 8px;
-  border-radius: var(--ios-radius-pill);
-  font-size: 11px;
-  font-weight: 600;
-  background: var(--tottus-green-light);
-  color: var(--tottus-green-dark);
-  border: 1px solid rgba(0, 133, 63, 0.15);
+  border-radius: var(--radius-pill);
+  line-height: 1.3;
 }
 
+.retail-subtitle,
 .ios-subtitle {
-  font-size: 12px;
-  color: var(--ios-text-secondary);
-  font-weight: 400;
+  font-size: 0.8125rem; /* 13px */
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-secondary);
+  margin-top: 2px;
 }
 
-/* Controles de Cabecera (Selector de Tienda + Status) */
+/* Controles de Navegación del Header */
 .ios-header-controls {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 0.65rem;
 }
 
-/* Selector estilo iOS Pill */
-.ios-select-pill {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  background: var(--ios-fill-tertiary);
-  padding: 5px 12px;
-  border-radius: var(--ios-radius-pill);
-  border: 1px solid rgba(0, 0, 0, 0.04);
-  transition: all 0.2s var(--ios-spring);
-}
-
-.ios-select-pill:focus-within, .ios-select-pill:hover {
-  background: rgba(0, 0, 0, 0.07);
-}
-
-.ios-select-label {
-  font-size: 11px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
-  color: var(--ios-text-secondary);
-}
-
-.ios-select {
-  background: transparent;
-  border: none;
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--ios-text-primary);
-  outline: none;
-  cursor: pointer;
-  font-family: inherit;
-}
-
-/* Indicador de Estado Conexión */
+/* Indicador de Estado Plano (Status Pill) */
 .ios-status-pill {
   display: inline-flex;
   align-items: center;
   gap: 6px;
+  font-size: var(--font-size-caption);
+  font-weight: var(--font-weight-semibold);
   padding: 5px 12px;
-  border-radius: var(--ios-radius-pill);
-  font-size: 11px;
-  font-weight: 600;
-  background: var(--ios-fill-tertiary);
-  color: var(--ios-text-secondary);
-  border: 1px solid rgba(0, 0, 0, 0.04);
-  transition: all 0.3s var(--ios-spring);
-}
-
-.ios-status-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background-color: var(--ios-text-tertiary);
+  border-radius: var(--radius-pill);
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-secondary);
+  transition: all 0.2s ease;
 }
 
 .ios-status-pill.online {
-  background: var(--tottus-green-light);
-  color: var(--tottus-green-dark);
-  border-color: rgba(0, 133, 63, 0.2);
-}
-
-.ios-status-pill.online .ios-status-dot {
-  background-color: var(--tottus-green-vibrant);
-  box-shadow: 0 0 8px rgba(0, 157, 74, 0.6);
-  animation: pulse-dot 2s infinite;
+  background-color: var(--color-success-bg);
+  border-color: var(--color-secondary);
+  color: var(--color-primary);
 }
 
 .ios-status-pill.offline {
-  background: #fef2f2;
-  color: #991b1b;
-  border-color: rgba(239, 68, 68, 0.2);
+  background-color: var(--color-error-bg);
+  border-color: var(--color-border);
+  color: var(--color-error-text);
+}
+
+.ios-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--color-text-tertiary);
+}
+
+.ios-status-pill.online .ios-status-dot {
+  background-color: var(--color-secondary);
 }
 
 .ios-status-pill.offline .ios-status-dot {
-  background-color: #ef4444;
+  background-color: var(--color-error-text);
 }
 
-@keyframes pulse-dot {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.6; transform: scale(1.15); }
-}
-
-/* Botón Circular Acción (Reset) */
+/* Botones de Acción en Header */
 .ios-icon-btn {
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  border: 1px solid var(--ios-glass-border);
-  background: var(--ios-card);
-  color: var(--ios-text-secondary);
-  display: flex;
+  width: 38px;
+  height: 38px;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background-color: var(--color-surface);
+  color: var(--color-text-primary);
   cursor: pointer;
-  transition: all 0.2s var(--ios-spring);
-  box-shadow: var(--ios-shadow-xs);
+  transition: all 0.2s ease;
 }
 
 .ios-icon-btn:hover {
-  background: #ffffff;
-  color: var(--ios-text-primary);
-  transform: scale(1.05);
+  background-color: var(--color-bg);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
 }
 
-.ios-icon-btn:active {
-  transform: scale(0.94);
+/* Badge de Usuario Autenticado */
+.ios-user-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: var(--font-size-caption);
+  font-weight: var(--font-weight-medium);
+  padding: 5px 11px;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-primary);
+}
+
+.ios-user-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--color-secondary);
 }
 
 /* ==========================================================================
-   ÁREA DE MENSAJES (Chat Timeline)
+   RESUMEN SUPERIOR: KPI CARDS EJECUTIVAS (Retail Design System)
+   ========================================================================== */
+.retail-kpi-bar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.85rem;
+  padding: 0.85rem 1.75rem;
+  background-color: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.retail-kpi-card {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.75rem 1rem;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-subtle);
+  transition: border-color 0.2s ease;
+}
+
+.retail-kpi-card:hover {
+  border-color: var(--color-accent);
+}
+
+.kpi-icon-wrap {
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+}
+
+.kpi-content {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.kpi-label {
+  font-size: 0.6875rem; /* 11px */
+  font-weight: var(--font-weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.kpi-value {
+  font-size: 0.9375rem; /* 15px */
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.25;
+  margin-top: 1px;
+}
+
+.kpi-subtext {
+  font-size: 0.6875rem;
+  font-weight: var(--font-weight-medium);
+  margin-top: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.kpi-status-success {
+  color: var(--color-primary);
+}
+
+.kpi-status-info {
+  color: var(--color-text-secondary);
+}
+
+/* ==========================================================================
+   ÁREA PRINCIPAL DE CHAT Y SCROLLER
    ========================================================================== */
 .ios-chat-main {
   flex: 1;
-  max-width: 1440px;
-  width: 100%;
-  margin: 0 auto;
-  padding: 16px 24px 12px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  overflow: hidden;
+  min-height: 0;
+  background-color: var(--color-bg);
   position: relative;
 }
 
@@ -392,36 +416,17 @@ textarea {
   flex: 1;
   overflow-y: auto;
   overflow-x: hidden;
-  padding-right: 6px;
+  padding: 1.5rem 1.75rem 1rem;
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  scroll-behavior: smooth;
-  width: 100%;
-  min-width: 0;
+  gap: 1.25rem;
 }
 
 /* ==========================================================================
-   BURBUJAS DE CONVERSACIÓN (iOS Speech Bubbles)
+   BURBUJAS DE CONVERSACIÓN (Limpias, Sin Degradados)
    ========================================================================== */
 
-/* Animación de Entrada Suave Apple */
-@keyframes ios-slide-up {
-  from {
-    opacity: 0;
-    transform: translateY(10px) scale(0.985);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-.animate-fade-in {
-  animation: ios-slide-up 0.28s var(--ios-spring) forwards;
-}
-
-/* Mensaje del Usuario: Estilo iMessage en Verde Tottus */
+/* Mensaje del Usuario */
 .ios-user-row {
   display: flex;
   justify-content: flex-end;
@@ -429,385 +434,267 @@ textarea {
 }
 
 .ios-user-bubble-wrap {
-  max-width: 82%;
+  max-width: 75%;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
 }
 
 .chat-bubble-user {
-  background: var(--tottus-gradient);
+  background-color: var(--color-primary); /* Verde Corporativo Sólido */
   color: #ffffff;
-  padding: 13px 18px;
-  border-radius: var(--ios-radius-md) var(--ios-radius-md) 6px var(--ios-radius-md);
-  box-shadow: 0 4px 16px var(--tottus-green-glow), inset 0 1px 1px rgba(255, 255, 255, 0.28);
-  font-size: 15px;
-  line-height: 1.45;
-  font-weight: 450;
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.55;
+  padding: 0.85rem 1.15rem;
+  border-radius: var(--radius-lg) var(--radius-lg) var(--radius-sm) var(--radius-lg);
+  box-shadow: var(--shadow-subtle);
   word-break: break-word;
-  letter-spacing: -0.01em;
 }
 
 .ios-msg-timestamp-user {
-  font-size: 11px;
-  color: var(--ios-text-tertiary);
+  font-size: var(--font-size-micro);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-secondary);
   margin-top: 4px;
-  padding-right: 4px;
-  font-weight: 500;
+  margin-right: 4px;
 }
 
-/* Mensaje del Asistente: Tarjeta Frosted Glass Translúcida */
+/* Mensaje del Asistente */
 .ios-assistant-row {
   display: flex;
   align-items: flex-start;
-  gap: 12px;
+  gap: 0.75rem;
   width: 100%;
-  min-width: 0;
 }
 
 .ios-avatar-small {
-  width: 32px;
-  height: 32px;
-  border-radius: var(--ios-radius-sm);
-  background: var(--tottus-gradient);
+  width: 34px;
+  height: 34px;
+  background-color: var(--color-primary);
   color: #ffffff;
+  font-size: 0.8125rem;
+  font-weight: var(--font-weight-bold);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 700;
-  font-size: 12px;
+  border-radius: var(--radius-sm);
   flex-shrink: 0;
   margin-top: 2px;
-  box-shadow: 0 2px 8px var(--tottus-green-glow);
 }
 
 .ios-assistant-bubble-wrap {
-  width: 100%;
-  max-width: 100%;
-  flex: 1;
-  min-width: 0;
+  max-width: 86%;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
 }
 
 .chat-bubble-assistant {
-  background: var(--ios-card);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid var(--ios-glass-specular);
-  box-shadow: var(--ios-shadow-card);
-  border-radius: 6px var(--ios-radius-md) var(--ios-radius-md) var(--ios-radius-md);
-  padding: 18px 24px;
-  font-size: 14.5px;
-  line-height: 1.55;
-  color: var(--ios-text-primary);
+  background-color: var(--color-surface); /* Blanco Sólido */
+  color: var(--color-text-primary);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-regular);
+  line-height: 1.6;
+  padding: 1.25rem 1.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg) var(--radius-lg) var(--radius-lg) var(--radius-sm);
+  box-shadow: var(--shadow-card);
   word-break: break-word;
-  width: 100%;
-  max-width: 100%;
-  min-width: 0;
-  box-sizing: border-box;
 }
 
 .ios-msg-timestamp-assistant {
-  font-size: 11px;
-  color: var(--ios-text-tertiary);
-  margin-top: 4px;
-  padding-left: 4px;
-  font-weight: 500;
+  font-size: var(--font-size-micro);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-secondary);
+  margin-top: 5px;
+  margin-left: 4px;
 }
 
-/* ==========================================================================
-   FORMATEO MARKDOWN Y TIPOGRAFÍA DENTRO DE BURBUJAS
-   ========================================================================== */
-.prose {
-  color: var(--ios-text-primary);
-  width: 100%;
-  max-width: 100%;
-  min-width: 0;
+/* Tipografía de Contenido Prose (Markdown dentro de Asistente) */
+.prose h1, .prose h2, .prose h3 {
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  margin-top: 0.85rem;
+  margin-bottom: 0.45rem;
+  line-height: 1.3;
 }
 
-.prose h1, .prose h2, .prose h3, .prose h4 {
-  color: var(--ios-text-primary);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  margin-top: 0.9em;
-  margin-bottom: 0.4em;
-  width: 100%;
-  max-width: 100%;
-  word-wrap: break-word;
-}
-
-.prose h3 {
-  font-size: 15.5px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.prose h4 {
-  font-size: 14px;
-  color: var(--ios-text-secondary);
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
-  font-weight: 600;
-}
+.prose h1 { font-size: 1.25rem; }
+.prose h2 { font-size: 1.15rem; }
+.prose h3 { font-size: 1.05rem; }
 
 .prose p {
-  margin-bottom: 0.6em;
-  width: 100%;
-  max-width: 100%;
-  white-space: normal !important;
-  word-wrap: break-word !important;
-  overflow-wrap: break-word !important;
-  box-sizing: border-box;
+  margin-bottom: 0.65rem;
 }
 
 .prose p:last-child {
   margin-bottom: 0;
 }
 
+.prose strong {
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+}
+
 .prose ul, .prose ol {
-  margin-left: 1.25rem;
-  margin-top: 0.4rem;
-  margin-bottom: 0.6rem;
-  padding-left: 0;
-  width: 100%;
-  max-width: 100%;
-  box-sizing: border-box;
+  margin-left: 1.35rem;
+  margin-bottom: 0.75rem;
 }
 
 .prose li {
-  margin-bottom: 0.35rem;
-  line-height: 1.5;
-  white-space: normal !important;
-  word-wrap: break-word !important;
-  overflow-wrap: break-word !important;
+  margin-bottom: 0.25rem;
 }
 
-.prose strong {
-  font-weight: 650;
-  color: var(--ios-text-primary);
-}
-
+.prose code.ios-inline-code,
 .prose code {
-  background: var(--ios-fill-tertiary);
-  color: var(--tottus-green-dark);
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 0.88em;
+  font-size: 0.8125rem;
+  background-color: var(--color-bg);
+  color: var(--color-primary);
   padding: 2px 6px;
-  border-radius: 6px;
-  font-weight: 600;
-  border: 1px solid rgba(0, 0, 0, 0.04);
-}
-
-.prose blockquote {
-  margin: 0.8rem 0;
-  padding: 10px 14px;
-  background: rgba(245, 158, 11, 0.08);
-  border-left: 3.5px solid #f59e0b;
-  border-radius: 4px var(--ios-radius-xs) var(--ios-radius-xs) 4px;
-  color: #92400e;
-  font-size: 13.5px;
-  line-height: 1.5;
-  width: 100%;
-  max-width: 100%;
-  white-space: normal !important;
-  word-wrap: break-word !important;
-  overflow-wrap: break-word !important;
-}
-
-.prose blockquote strong {
-  color: #78350f;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
 }
 
 /* ==========================================================================
-   TABLAS Y TARJETAS DE DATOS (iOS List Cards)
+   TABLAS DE DATOS EJECUTIVAS (Data Table Limpia, Sin Degradados)
    ========================================================================== */
 .ios-table-scroll-container {
-  max-height: 480px; /* Límite visual de 15 filas con scroll vertical suave */
   width: 100%;
-  max-width: 100%;
-  min-width: 0;
+  max-height: 480px;
   overflow-y: auto;
   overflow-x: auto;
-  border-radius: var(--ios-radius-sm);
-  border: 1px solid var(--ios-glass-border);
-  background: #ffffff;
-  margin-top: 0.85rem;
-  margin-bottom: 0.85rem;
-  box-shadow: var(--ios-shadow-xs);
-  -webkit-overflow-scrolling: touch;
-  box-sizing: border-box;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  margin: 0.85rem 0;
+  background-color: var(--color-surface);
 }
 
-.ios-table-scroll-container table,
-.prose table {
-  min-width: 100%;
-  width: max-content; /* Permite que las columnas respiren y se active el scroll horizontal */
-  border-collapse: separate;
-  border-spacing: 0;
-  margin: 0;
-  font-size: 13px;
-  background: #ffffff;
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: var(--font-size-caption);
+  line-height: 1.45;
 }
 
-/* Cabecera pegajosa (Sticky Header 100% opaca para evitar solapamientos) */
-.ios-table-scroll-container thead th,
-.prose thead th {
+thead th {
+  background-color: var(--color-primary); /* Verde Sólido Corporativo */
+  color: #ffffff;
+  font-weight: var(--font-weight-semibold);
+  font-size: 0.78rem;
+  padding: 10px 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
   position: sticky;
   top: 0;
-  z-index: 6;
-  background-color: #f1f3f5 !important; /* 100% opaco para que no se traspase el texto de abajo */
-  color: var(--ios-text-secondary);
-  font-weight: 650;
-  font-size: 11.5px;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  text-align: left;
-  padding: 10px 14px;
-  white-space: nowrap; /* Evita que los nombres de columna se partan en 5 renglones */
-  border-bottom: 2px solid var(--ios-divider);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  z-index: 10;
+  border-bottom: 2px solid var(--color-primary-hover);
+  white-space: nowrap;
 }
 
-.prose td,
-.ios-table-scroll-container td {
+tbody td {
   padding: 9px 14px;
-  white-space: nowrap; /* Celdas limpias en una sola línea */
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-  color: var(--ios-text-primary);
-  font-variant-numeric: tabular-nums;
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-regular);
+  white-space: nowrap;
 }
 
-.prose tr:last-child td,
-.ios-table-scroll-container tr:last-child td {
-  border-bottom: none;
+tbody tr:nth-child(even) {
+  background-color: var(--color-surface-subtle); /* Zebra striping suave */
 }
 
-.prose tr:nth-child(even) td,
-.ios-table-scroll-container tr:nth-child(even) td {
-  background-color: rgba(250, 250, 252, 0.7);
+tbody tr:hover {
+  background-color: var(--color-accent-subtle); /* Resaltado tenue al posar mouse */
 }
 
-.prose tr:hover td,
-.ios-table-scroll-container tr:hover td {
-  background-color: var(--tottus-green-light);
-}
-
-/* Columna enumeradora '#' con Doble Fijación (Sticky Vertical + Sticky Horizontal) */
-.th-row-num {
-  position: sticky !important;
-  left: 0 !important;
-  top: 0 !important;
-  z-index: 10 !important; /* Por encima de todo */
-  background-color: #e9ecef !important;
-  width: 44px !important;
-  min-width: 44px !important;
-  max-width: 44px !important;
-  text-align: center !important;
-  border-right: 1px solid var(--ios-divider) !important;
-}
-
+.th-row-num,
 .td-row-num {
-  position: sticky !important;
-  left: 0 !important;
-  z-index: 5 !important;
-  background-color: #f8f9fa !important;
-  width: 44px !important;
-  min-width: 44px !important;
-  max-width: 44px !important;
-  text-align: center !important;
-  font-weight: 600;
-  color: var(--ios-text-secondary);
-  border-right: 1px solid var(--ios-divider) !important;
-  user-select: none;
+  text-align: center;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-secondary);
+  width: 44px;
 }
 
-.prose tr:hover .td-row-num,
-.ios-table-scroll-container tr:hover .td-row-num {
-  background-color: #d4f2de !important;
-  color: var(--tottus-green-dark) !important;
+thead th.th-row-num {
+  color: #ffffff;
 }
 
-/* Contenedor de Detalle Expandible de Datos */
+/* Tarjeta Contenedora de Datos Crudos para Excel */
 .ios-data-card {
-  margin-top: 14px;
-  padding: 14px;
-  background: rgba(255, 255, 255, 0.7);
-  border-radius: var(--ios-radius-md);
-  border: 1px solid var(--ios-glass-border);
-  box-shadow: var(--ios-shadow-xs);
+  margin-top: 1rem;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
 }
 
 .ios-data-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 10px;
+  padding: 0.75rem 1rem;
+  background-color: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
 }
 
 .ios-data-title {
-  font-size: 12px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  color: var(--ios-text-secondary);
+  font-size: 0.8125rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
 }
 
 .ios-export-btn {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 5px 12px;
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--tottus-green);
-  background: var(--tottus-green-light);
-  border: 1px solid rgba(0, 133, 63, 0.18);
-  border-radius: var(--ios-radius-pill);
+  background-color: var(--color-primary);
+  color: #ffffff;
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-caption);
+  font-weight: var(--font-weight-semibold);
+  padding: 6px 14px;
+  border-radius: var(--radius-sm);
+  border: none;
   cursor: pointer;
-  transition: all 0.2s var(--ios-spring);
-  text-decoration: none;
+  transition: background-color 0.2s ease;
 }
 
 .ios-export-btn:hover {
-  background: #d4f2de;
-  transform: translateY(-1px);
-  box-shadow: 0 3px 8px rgba(0, 133, 63, 0.15);
+  background-color: var(--color-primary-hover);
 }
 
-.ios-export-btn:active {
-  transform: scale(0.96);
-}
-
-/* Badge de Auditoría Operativa */
+/* Insignia de Verificación y Auditoría */
 .ios-audit-badge {
-  margin-top: 10px;
-  padding-top: 8px;
-  border-top: 1px solid var(--ios-divider);
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-size: 11.5px;
-  color: var(--tottus-green-dark);
-  font-weight: 500;
+  font-size: var(--font-size-micro);
+  font-weight: var(--font-weight-semibold);
+  background-color: var(--color-accent-subtle);
+  border: 1px solid var(--color-accent);
+  color: var(--color-primary);
+  padding: 5px 10px;
+  border-radius: var(--radius-sm);
+  margin-top: 0.75rem;
 }
 
 /* ==========================================================================
-   CHIPS DE SUGERENCIAS RÁPIDAS (iOS Pills)
+   BARRA DE SUGERENCIAS RÁPIDAS (Atajos / Chips Planos)
    ========================================================================== */
 .ios-suggestions-bar {
-  padding: 8px 0;
   flex-shrink: 0;
+  padding: 0.65rem 1.75rem;
+  background-color: var(--color-surface);
+  border-top: 1px solid var(--color-border);
 }
 
 .ios-chips-scroller {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 0.65rem;
   overflow-x: auto;
-  padding-bottom: 4px;
   scrollbar-width: none;
 }
 
@@ -816,161 +703,127 @@ textarea {
 }
 
 .ios-chips-label {
-  font-size: 11px;
-  font-weight: 600;
+  font-size: 0.75rem;
+  font-weight: var(--font-weight-semibold);
   text-transform: uppercase;
-  letter-spacing: 0.04em;
-  color: var(--ios-text-secondary);
+  letter-spacing: 0.05em;
+  color: var(--color-text-secondary);
   white-space: nowrap;
-  padding-left: 2px;
 }
 
 .suggestion-chip {
-  padding: 7px 15px;
-  border-radius: var(--ios-radius-pill);
-  background: var(--ios-glass);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  color: var(--ios-text-primary);
-  font-size: 12.5px;
-  font-weight: 500;
-  cursor: pointer;
-  white-space: nowrap;
-  box-shadow: var(--ios-shadow-xs);
-  transition: all 0.22s var(--ios-spring);
-  font-family: inherit;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
+  font-family: var(--font-family-base);
+  font-size: 0.8125rem;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  padding: 6px 14px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
 }
 
 .suggestion-chip:hover {
-  background: #ffffff;
-  border-color: rgba(0, 133, 63, 0.35);
-  color: var(--tottus-green);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.06);
-}
-
-.suggestion-chip:active {
-  transform: scale(0.95);
+  background-color: var(--color-accent-subtle);
+  border-color: var(--color-secondary);
+  color: var(--color-primary);
 }
 
 /* ==========================================================================
-   BARRA DE ENTRADA FLOTANTE (iOS Capsule Input / Dynamic Island)
+   BARRA DE ENTRADA DE CONSULTAS (Input Capsule Limpio y Plano)
    ========================================================================== */
 .ios-input-capsule {
-  background: var(--ios-glass);
-  backdrop-filter: blur(28px) saturate(190%);
-  -webkit-backdrop-filter: blur(28px) saturate(190%);
-  border: 1px solid var(--ios-glass-specular);
-  border-radius: var(--ios-radius-lg);
-  box-shadow: var(--ios-shadow-floating);
-  padding: 8px 10px 8px 18px;
-  margin-bottom: 8px;
   flex-shrink: 0;
-  transition: all 0.25s var(--ios-spring);
-}
-
-.ios-input-capsule:focus-within {
-  border-color: rgba(0, 133, 63, 0.4);
-  box-shadow: 0 14px 40px -6px rgba(0, 133, 63, 0.12), 0 0 0 3px rgba(0, 133, 63, 0.12);
-  background: rgba(255, 255, 255, 0.94);
+  padding: 0.85rem 1.75rem 1.15rem;
+  background-color: var(--color-surface);
+  border-top: 1px solid var(--color-border);
 }
 
 .ios-input-row {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 0.65rem;
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 0.35rem 0.5rem 0.35rem 1rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ios-input-row:focus-within {
+  border-color: var(--color-primary);
+  background-color: var(--color-surface);
+  box-shadow: 0 0 0 3px rgba(4, 92, 52, 0.12);
 }
 
 .ios-text-input {
   flex: 1;
-  background: transparent;
   border: none;
-  font-size: 15px;
-  color: var(--ios-text-primary);
+  background: transparent;
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-body);
+  color: var(--color-text-primary);
   outline: none;
-  font-family: inherit;
-  line-height: 1.4;
+  padding: 0.5rem 0;
 }
 
 .ios-text-input::placeholder {
-  color: var(--ios-text-tertiary);
-  font-weight: 400;
+  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-regular);
 }
 
-/* Botón Circular Enviar Apple */
 .ios-send-btn {
   width: 40px;
   height: 40px;
-  border-radius: 50%;
+  border-radius: var(--radius-md);
+  background-color: var(--color-primary);
   border: none;
-  background: var(--tottus-gradient);
   color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
   cursor: pointer;
-  box-shadow: 0 4px 14px rgba(0, 133, 63, 0.45);
-  transition: all 0.25s var(--ios-spring);
-  opacity: 1;
-}
-
-.ios-send-btn:hover:not(:disabled):not(.processing) {
-  background: var(--tottus-gradient-hover);
-  transform: scale(1.08);
-  box-shadow: 0 6px 18px rgba(0, 133, 63, 0.55);
-}
-
-.ios-send-btn:active:not(:disabled):not(.processing) {
-  transform: scale(0.92);
-}
-
-/* Estado bloqueado SOLO cuando hay una consulta en camino */
-.ios-send-btn:disabled,
-.ios-send-btn.processing {
-  opacity: 0.45 !important;
-  background: #a1a1aa !important;
-  color: #ffffff !important;
-  cursor: not-allowed !important;
-  transform: none !important;
-  box-shadow: none !important;
-}
-
-.ios-text-input:disabled {
-  opacity: 0.65;
-  cursor: wait;
+  transition: background-color 0.2s ease;
+  flex-shrink: 0;
 }
 
 .ios-send-btn svg {
   width: 18px;
   height: 18px;
-  stroke-width: 2.2;
+  stroke-width: 2.4;
 }
 
-/* Barra Inferior de Opciones (iOS Switch Toggle) */
+.ios-send-btn:hover:not(:disabled) {
+  background-color: var(--color-primary-hover);
+}
+
+.ios-send-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* Opciones Inferiores de Entrada (Switch y Hint) */
 .ios-input-footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 6px;
-  padding-top: 6px;
-  border-top: 1px solid rgba(0, 0, 0, 0.04);
-  font-size: 12px;
-  color: var(--ios-text-secondary);
+  margin-top: 0.65rem;
+  padding: 0 0.35rem;
+  font-size: 0.78rem;
+  color: var(--color-text-secondary);
 }
 
-/* Toggle Switch Apple */
 .ios-toggle-label {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   cursor: pointer;
-  user-select: none;
-  font-weight: 500;
+  font-weight: var(--font-weight-medium);
 }
 
 .ios-switch {
@@ -978,7 +831,6 @@ textarea {
   display: inline-block;
   width: 34px;
   height: 20px;
-  flex-shrink: 0;
 }
 
 .ios-switch input {
@@ -990,46 +842,42 @@ textarea {
 .ios-slider {
   position: absolute;
   cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #e5e5ea;
-  transition: all 0.25s var(--ios-spring);
-  border-radius: var(--ios-radius-pill);
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: var(--color-border);
+  transition: 0.2s ease;
+  border-radius: 20px;
 }
 
-.ios-slider::before {
+.ios-slider:before {
   position: absolute;
   content: "";
-  height: 16px;
-  width: 16px;
-  left: 2px;
-  bottom: 2px;
-  background-color: white;
-  transition: all 0.25s var(--ios-spring);
+  height: 14px;
+  width: 14px;
+  left: 3px;
+  bottom: 3px;
+  background-color: #ffffff;
+  transition: 0.2s ease;
   border-radius: 50%;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
-.ios-switch input:checked + .ios-slider {
-  background-color: var(--tottus-green);
+input:checked + .ios-slider {
+  background-color: var(--color-secondary);
 }
 
-.ios-switch input:checked + .ios-slider::before {
+input:checked + .ios-slider:before {
   transform: translateX(14px);
 }
 
 .ios-hint {
-  font-size: 11px;
-  color: var(--ios-text-tertiary);
+  font-size: 0.75rem;
+  color: var(--color-text-tertiary);
 }
 
 /* ==========================================================================
-   ANIMACIÓN INDICADOR DE ESCRITURA (iOS 3-Dot Pulse)
+   ANIMACIONES DE CARGA (Loading State Limpio)
    ========================================================================== */
 .dot-typing {
-  position: relative;
   display: inline-flex;
   align-items: center;
   gap: 4px;
@@ -1039,86 +887,90 @@ textarea {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background-color: var(--tottus-green);
-  opacity: 0.4;
-  animation: ios-dot-pulse 1.4s infinite ease-in-out;
+  background-color: var(--color-primary);
+  display: inline-block;
+  animation: dotBounce 1.2s infinite ease-in-out both;
 }
 
-.dot-typing span:nth-child(2) {
-  animation-delay: 0.2s;
+.dot-typing span:nth-child(1) { animation-delay: -0.32s; }
+.dot-typing span:nth-child(2) { animation-delay: -0.16s; }
+
+@keyframes dotBounce {
+  0%, 80%, 100% { transform: scale(0); opacity: 0.3; }
+  40% { transform: scale(1); opacity: 1; }
 }
 
-.dot-typing span:nth-child(3) {
-  animation-delay: 0.4s;
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out forwards;
 }
 
-@keyframes ios-dot-pulse {
-  0%, 80%, 100% {
-    transform: scale(0.8);
-    opacity: 0.3;
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================================================
+   BARRA DE DESPLAZAMIENTO (SCROLLBARS LIMPIAS)
+   ========================================================================== */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: var(--radius-pill);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-accent);
+}
+
+/* ==========================================================================
+   ADAPTABILIDAD RESPONSIVE (Móviles y Tablets)
+   ========================================================================== */
+@media (max-width: 900px) {
+  .retail-kpi-bar {
+    grid-template-columns: repeat(2, 1fr);
   }
-  40% {
-    transform: scale(1.2);
-    opacity: 1;
-  }
 }
 
-/* Mensajes de Error */
-.ios-error-bubble {
-  background: #fef2f2;
-  border: 1px solid rgba(239, 68, 68, 0.25);
-  color: #991b1b;
-  border-radius: var(--ios-radius-md);
-  padding: 14px 18px;
-  font-size: 13.5px;
-  line-height: 1.5;
-  box-shadow: var(--ios-shadow-xs);
-}
-
-/* Responsive Móvil / Tablet */
 @media (max-width: 640px) {
+  .retail-header,
   .ios-header {
-    padding: 0 14px;
-    height: 58px;
+    padding: 0.75rem 1rem;
   }
-  .ios-chat-main {
-    padding: 12px 12px 6px;
+
+  .retail-kpi-bar {
+    grid-template-columns: 1fr;
+    padding: 0.65rem 1rem;
   }
-  .ios-subtitle {
+
+  .retail-title {
+    font-size: 1.15rem;
+  }
+
+  .retail-subtitle {
     display: none;
   }
-  .ios-select-label {
-    display: none;
+
+  .ios-messages-scroller {
+    padding: 1rem 1rem 0.75rem;
   }
-  .chat-bubble-user {
-    max-width: 90%;
-    font-size: 14px;
-    padding: 11px 15px;
+
+  .ios-assistant-bubble-wrap {
+    max-width: 94%;
   }
-  .chat-bubble-assistant {
-    max-width: 96%;
-    font-size: 13.5px;
-    padding: 14px 16px;
+
+  .ios-user-bubble-wrap {
+    max-width: 88%;
   }
+
   .ios-input-capsule {
-    padding: 6px 8px 6px 14px;
-    border-radius: 22px;
-  }
-  .ios-text-input {
-    font-size: 14px;
-  }
-  .ios-send-btn {
-    width: 36px;
-    height: 36px;
-  }
-  .ios-hint {
-    display: none;
-  }
-  .prose p,
-  .prose ul,
-  .prose ol,
-  .prose blockquote,
-  .prose h1, .prose h2, .prose h3, .prose h4 {
-    max-width: 100% !important;
+    padding: 0.65rem 1rem 0.85rem;
   }
 }

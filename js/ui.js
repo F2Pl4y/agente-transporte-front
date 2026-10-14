@@ -56,20 +56,20 @@ class LogisticsUI {
         <div class="ios-avatar-small">TP</div>
         <div class="ios-assistant-bubble-wrap">
           <div class="chat-bubble-assistant">
-            <p style="font-weight: 650; font-size: 15.5px; margin-bottom: 6px; letter-spacing: -0.01em;">
-              ¡Hola! Soy tu Asistente de Transporte y Despachos de Tottus Perú 🇵🇪
+            <p style="font-weight: 700; font-size: 1.125rem; color: var(--color-primary); margin-bottom: 6px; letter-spacing: -0.01em;">
+              ¡Hola! Soy tu Asistente de Transporte y Despachos — Tottus Perú 🇵🇪
             </p>
-            <p style="color: var(--ios-text-secondary); margin-bottom: 8px;">
-              Puedo asistirte en tiempo real con las operaciones del Centro de Distribución y Tiendas:
+            <p style="color: var(--color-text-secondary); font-size: var(--font-size-body); margin-bottom: 10px;">
+              Plataforma de analítica logística y trazabilidad en ruta desde el Centro de Distribución:
             </p>
-            <ul style="margin-left: 1.25rem; font-size: 13.5px; color: var(--ios-text-primary);">
+            <ul style="margin-left: 1.25rem; font-size: var(--font-size-body); color: var(--color-text-primary);">
               <li><strong>Placa del camión y transporte asignado:</strong> para cualquier número de TIM o guía.</li>
               <li><strong>Consolidado de carga:</strong> Total de cajas, pallets, bultos y peso en kilogramos.</li>
               <li><strong>Detalle de mercadería:</strong> SKUs y productos enviados a cada tienda.</li>
               <li><strong>Control preventivo:</strong> Artículos perecibles con vencimiento próximo en ruta.</li>
             </ul>
-            <p style="font-size: 12.5px; color: var(--ios-text-secondary); margin-top: 10px;">
-              💡 <em>Escribe tu consulta abajo o selecciona una de las sugerencias rápidas.</em>
+            <p style="font-size: var(--font-size-caption); color: var(--color-text-secondary); margin-top: 10px; border-top: 1px solid var(--color-border); padding-top: 8px;">
+              💡 <em>Selecciona un atajo arriba o formula tu consulta indicando el TIM, tienda o fecha de despacho.</em>
             </p>
           </div>
           <div class="ios-msg-timestamp-assistant">Asistente Logístico Tottus • ${customSubtitle}</div>
@@ -117,11 +117,11 @@ class LogisticsUI {
     this.chatContainer.insertAdjacentHTML('beforeend', typingHtml);
     this.scrollToBottom();
 
-    // Actualizaciones progresivas para consultas analíticas de BigQuery y síntesis de IA
+    // Actualizaciones progresivas orientadas al negocio logístico
     const steps = [
-      { delay: 2600, text: 'Buscando datos y despachos en BigQuery...' },
-      { delay: 5800, text: 'Calculando camiones, transferencias y pesos...' },
-      { delay: 9200, text: 'Sintetizando informe ejecutivo con Gemini...' }
+      { delay: 2600, text: 'Consultando transferencias y despachos...' },
+      { delay: 5800, text: 'Consolidando camiones, cajas y pesos...' },
+      { delay: 9200, text: 'Preparando informe ejecutivo de transporte...' }
     ];
 
     if (!this._typingTimers) {
@@ -408,7 +408,7 @@ class LogisticsUI {
     xml += ' <Styles>\n';
     xml += '  <Style ss:ID="Header">\n';
     xml += '   <Font ss:Bold="1" ss:Color="#FFFFFF"/>\n';
-    xml += '   <Interior ss:Color="#00853F" ss:Pattern="Solid"/>\n';
+    xml += '   <Interior ss:Color="#045C34" ss:Pattern="Solid"/>\n';
     xml += '   <Alignment ss:Horizontal="Center" ss:Vertical="Center"/>\n';
     xml += '  </Style>\n';
     xml += '  <Style ss:ID="Default">\n';
@@ -471,9 +471,9 @@ class LogisticsUI {
   addErrorMessage(text) {
     const msgHtml = `
       <div class="ios-assistant-row animate-fade-in">
-        <div class="ios-avatar-small" style="background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);">!</div>
+        <div class="ios-avatar-small" style="background-color: #b91c1c;">!</div>
         <div class="ios-assistant-bubble-wrap">
-          <div class="ios-error-bubble">
+          <div class="ios-error-bubble" style="background-color: #fdf2f2; border: 1px solid #fecaca; color: #b91c1c; padding: 12px 16px; border-radius: 10px; font-size: 0.95rem;">
             ${this.escapeHtml(text)}
           </div>
         </div>

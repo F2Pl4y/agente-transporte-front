@@ -6,14 +6,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Asistente de Transporte — Tottus Perú</title>
 
+  <!-- Tipografía Oficial: Montserrat (Google Fonts) según Skill Diseño Premium Retail -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
   <!-- Favicon Tottus Perú (SVG y Data URI embebido para evitar error 404 en Live Server y file://) -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='25' fill='%2300843D'/%3E%3Ctext x='50%25' y='55%25' font-family='Arial,sans-serif' font-weight='bold' font-size='50' fill='white' dominant-baseline='middle' text-anchor='middle'%3ETP%3C/text%3E%3C/svg%3E">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23045c34'/%3E%3Ctext x='50%25' y='55%25' font-family='Montserrat,sans-serif' font-weight='800' font-size='48' fill='white' dominant-baseline='middle' text-anchor='middle'%3ETP%3C/text%3E%3C/svg%3E">
   <link rel="alternate icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=">
 
-  <!-- Sistema de Diseño Apple iOS + Tottus (100% CSS Nativo, sin dependencias externas) -->
-  <link rel="stylesheet" href="css/custom.css?v=3.7">
+  <!-- Sistema de Diseño Visual Corporativo Retail (Colores Planos Reales, Sin Degradados) -->
+  <link rel="stylesheet" href="css/custom.css?v=4.0">
   <!-- Módulo de Autenticación y Control de Acceso @tottus.com.pe -->
-  <link rel="stylesheet" href="css/auth.css?v=3.7">
+  <link rel="stylesheet" href="css/auth.css?v=4.0">
 </head>
 
 <body>
@@ -21,20 +26,20 @@
   <div class="app-container">
 
     <!-- ========================================================================= -->
-    <!-- CABECERA FROSTED GLASS (iOS Navigation Bar)                               -->
+    <!-- CABECERA EJECUTIVA CORPORATIVA (Header Limpio y Plano)                   -->
     <!-- ========================================================================= -->
-    <header class="ios-header">
-      <div class="ios-header-content">
+    <header class="retail-header">
+      <div class="retail-header-content">
 
-        <!-- Marca y Avatar Estilo App iOS -->
-        <div class="ios-brand">
-          <div class="ios-app-icon">TP</div>
-          <div class="ios-title-wrap">
-            <div class="ios-title-row">
-              <h1 class="ios-title">Asistente de Transporte</h1>
-              <span class="ios-badge-pill">🇵🇪 Perú</span>
+        <!-- Marca e Identidad Tottus Perú -->
+        <div class="retail-brand">
+          <div class="retail-app-icon">TP</div>
+          <div class="retail-title-wrap">
+            <div class="retail-title-row">
+              <h1 class="retail-title">Asistente de Transporte</h1>
+              <span class="retail-badge-pill">🇵🇪 Operaciones Perú</span>
             </div>
-            <span class="ios-subtitle">Centro de Distribución ➔ Tiendas Tottus</span>
+            <span class="retail-subtitle">Centro de Distribución Huachipa ➔ Tiendas Tottus</span>
           </div>
         </div>
 
@@ -70,6 +75,47 @@
 
       </div>
     </header>
+
+    <!-- ========================================================================= -->
+    <!-- RESUMEN SUPERIOR: KPI CARDS EJECUTIVAS (Retail Design System)             -->
+    <!-- ========================================================================= -->
+    <section class="retail-kpi-bar" aria-label="Resumen operativo">
+      <div class="retail-kpi-card">
+        <div class="kpi-icon-wrap">🏭</div>
+        <div class="kpi-content">
+          <span class="kpi-label">Centro de Distribución</span>
+          <span class="kpi-value">Huachipa (676 / 655)</span>
+          <span class="kpi-subtext kpi-status-success">● Secos y Frescos Activos</span>
+        </div>
+      </div>
+
+      <div class="retail-kpi-card">
+        <div class="kpi-icon-wrap">🏪</div>
+        <div class="kpi-content">
+          <span class="kpi-label">Red de Despacho</span>
+          <span class="kpi-value">40+ Tiendas Perú</span>
+          <span class="kpi-subtext kpi-status-info">● Monitoreo en Tiempo Real</span>
+        </div>
+      </div>
+
+      <div class="retail-kpi-card">
+        <div class="kpi-icon-wrap">📦</div>
+        <div class="kpi-content">
+          <span class="kpi-label">Ventana Operativa</span>
+          <span class="kpi-value">Últimos 31 Días</span>
+          <span class="kpi-subtext kpi-status-info">● Despachos y Transferencias</span>
+        </div>
+      </div>
+
+      <div class="retail-kpi-card">
+        <div class="kpi-icon-wrap">🚛</div>
+        <div class="kpi-content">
+          <span class="kpi-label">Trazabilidad en Ruta</span>
+          <span class="kpi-value">TIMs, Guías y Placas</span>
+          <span class="kpi-subtext kpi-status-success">● Atención Continua 24/7</span>
+        </div>
+      </div>
+    </section>
 
     <!-- ========================================================================= -->
     <!-- ÁREA PRINCIPAL DE CHAT                                                    -->
@@ -218,12 +264,12 @@
   <div id="audit-overlay" class="auth-overlay hidden">
     <div class="auth-card" style="max-width: 960px; width: 94%; max-height: 88vh; display: flex; flex-direction: column; text-align: left; padding: 1.5rem 1.75rem;">
 
-      <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--ios-divider); padding-bottom: 12px; margin-bottom: 14px;">
+      <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--color-border); padding-bottom: 12px; margin-bottom: 14px;">
         <div style="display: flex; align-items: center; gap: 10px;">
           <div class="auth-brand-badge" style="width: 38px; height: 38px; font-size: 16px; margin: 0;">🛡️</div>
           <div>
-            <h2 style="font-size: 17px; font-weight: 700; color: var(--ios-text-primary); margin: 0;">Gobernanza y Bitácora de Consultas</h2>
-            <p style="font-size: 12px; color: var(--ios-text-secondary); margin: 2px 0 0;">Historial cronológico de preguntas realizadas por todos los colaboradores.</p>
+            <h2 style="font-size: 1.15rem; font-weight: 700; color: var(--color-text-primary); margin: 0;">Gobernanza y Bitácora de Consultas</h2>
+            <p style="font-size: 0.8125rem; color: var(--color-text-secondary); margin: 2px 0 0;">Historial cronológico de preguntas realizadas por todos los colaboradores.</p>
           </div>
         </div>
         <button id="close-audit-btn" type="button" class="ios-icon-btn" title="Cerrar panel" style="width: 32px; height: 32px; font-size: 16px;">
@@ -235,7 +281,7 @@
       <div style="display: flex; gap: 10px; margin-bottom: 12px; align-items: center;">
         <div style="flex: 1; position: relative;">
           <input id="audit-search-input" type="text" placeholder="Filtrar por usuario, prompt o palabra clave..." class="auth-email-input" style="font-size: 13px; padding: 8px 12px 8px 34px; width: 100%;">
-          <svg style="position: absolute; left: 10px; top: 10px; width: 16px; height: 16px; color: var(--ios-text-tertiary);" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg style="position: absolute; left: 10px; top: 10px; width: 16px; height: 16px; color: var(--color-text-tertiary);" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
           </svg>
         </div>
@@ -245,11 +291,11 @@
       </div>
 
       <!-- Tabla de Auditoría con Scroll -->
-      <div id="audit-table-wrap" style="flex: 1; overflow-y: auto; overflow-x: auto; border: 1px solid var(--ios-divider); border-radius: 12px; background: #fff; max-height: 55vh;">
-        <div style="padding: 30px; text-align: center; color: var(--ios-text-secondary); font-size: 13px;">Cargando bitácora de auditoría...</div>
+      <div id="audit-table-wrap" style="flex: 1; overflow-y: auto; overflow-x: auto; border: 1px solid var(--color-border); border-radius: 10px; background: #ffffff; max-height: 55vh;">
+        <div style="padding: 30px; text-align: center; color: var(--color-text-secondary); font-size: 13px;">Cargando bitácora de auditoría...</div>
       </div>
 
-      <div style="margin-top: 12px; display: flex; justify-content: space-between; align-items: center; font-size: 11.5px; color: var(--ios-text-tertiary);">
+      <div style="margin-top: 12px; display: flex; justify-content: space-between; align-items: center; font-size: 11.5px; color: var(--color-text-secondary);">
         <span id="audit-total-count">0 consultas registradas</span>
         <span>Bitácora centralizada de trazabilidad y gobernanza</span>
       </div>
@@ -259,10 +305,10 @@
 
   <!-- Scripts de la Aplicación (100% locales, carga ultrarrápida sin dependencias externas) -->
   <script src="js/marked.min.js"></script>
-  <script src="js/ui.js?v=3.7"></script>
-  <script src="js/api.js?v=3.7"></script>
-  <script src="js/auth.js?v=3.7"></script>
-  <script src="js/app.js?v=3.7"></script>
+  <script src="js/ui.js?v=4.0"></script>
+  <script src="js/api.js?v=4.0"></script>
+  <script src="js/auth.js?v=4.0"></script>
+  <script src="js/app.js?v=4.0"></script>
 </body>
 
 </html>
