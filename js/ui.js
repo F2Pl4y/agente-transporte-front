@@ -167,37 +167,52 @@ class LogisticsUI {
         .replace(/\n/g, '<br/>');
     }
 
-    // Mejorar tablas Markdown de Gemini: agregar columna '#' y contenedor con scroll de 15 filas
+    // Mejorar tablas Markdown de Gemini: agregar o estilizar columna '#' y asegurar contenedor con scroll
     try {
       const parserDiv = document.createElement('div');
       parserDiv.innerHTML = formattedAnswer;
       const tables = parserDiv.querySelectorAll('table');
       tables.forEach(table => {
-        // 1. Agregar columna '#' en la cabecera
+        // 1. Agregar o estilizar columna '#' en la cabecera
         const thRow = table.querySelector('thead tr');
+        const firstTh = thRow ? thRow.querySelector('th') : null;
+        const firstThText = firstTh ? firstTh.textContent.trim().toLowerCase() : '';
+        const alreadyHasNumCol = ['#', 'n°', 'nro', 'item', 'n'].includes(firstThText);
+
         if (thRow && !thRow.querySelector('.th-row-num')) {
-          const th = document.createElement('th');
-          th.className = 'th-row-num';
-          th.textContent = '#';
-          thRow.insertBefore(th, thRow.firstChild);
+          if (alreadyHasNumCol) {
+            firstTh.classList.add('th-row-num');
+          } else {
+            const th = document.createElement('th');
+            th.className = 'th-row-num';
+            th.textContent = '#';
+            thRow.insertBefore(th, thRow.firstChild);
+          }
         }
 
-        // 2. Agregar número de fila 1, 2, 3... en el cuerpo
+        // 2. Agregar o estilizar número de fila 1, 2, 3... en el cuerpo
         const trs = table.querySelectorAll('tbody tr');
         trs.forEach((tr, idx) => {
           if (!tr.querySelector('.td-row-num')) {
-            const td = document.createElement('td');
-            td.className = 'td-row-num';
-            td.textContent = (idx + 1);
-            tr.insertBefore(td, tr.firstChild);
+            if (alreadyHasNumCol) {
+              const firstTd = tr.querySelector('td');
+              if (firstTd) firstTd.classList.add('td-row-num');
+            } else {
+              const td = document.createElement('td');
+              td.className = 'td-row-num';
+              td.textContent = (idx + 1);
+              tr.insertBefore(td, tr.firstChild);
+            }
           }
         });
 
-        // 3. Envolver la tabla en un scroll container
-        const wrapper = document.createElement('div');
-        wrapper.className = 'ios-table-scroll-container';
-        table.parentNode.insertBefore(wrapper, table);
-        wrapper.appendChild(table);
+        // 3. Envolver la tabla en un scroll container si no está ya envuelta
+        if (!table.closest('.ios-table-scroll-container')) {
+          const wrapper = document.createElement('div');
+          wrapper.className = 'ios-table-scroll-container';
+          table.parentNode.insertBefore(wrapper, table);
+          wrapper.appendChild(table);
+        }
       });
       formattedAnswer = parserDiv.innerHTML;
     } catch (e) {
