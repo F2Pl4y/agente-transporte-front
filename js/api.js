@@ -87,6 +87,20 @@ class LogisticsAPI {
       sessionStorage.removeItem('tottus_session_id');
     } catch (e) {}
     this.sessionId = this.getOrCreateSessionId();
+    this.clearCache().catch(() => {});
+  }
+
+  async clearCache() {
+    if (!this.baseUrl) return false;
+    try {
+      const response = await fetch(`${this.baseUrl}/api/cache/clear`, {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' }
+      });
+      return response.ok;
+    } catch (e) {
+      return false;
+    }
   }
 
   setBaseUrl(newUrl) {
