@@ -1,9 +1,9 @@
 # 🚛 Asistente de Transporte y Despachos — Frontend Web 🇵🇪
 ### Interfaz Ejecutiva para Supervisores de Tienda y Operaciones Logísticas (Tottus Perú)
 
-Este repositorio contiene la **Aplicación Web Frontend** del Asistente de Transporte y Despachos de **Tottus Perú (Falabella)**. Permite a supervisores de tienda y coordinadores logísticos consultar en lenguaje natural el estado de camiones, placas, guías (`Trf_DO`), embarques (`Shipment`), transferencias (`TIM`), consolidado de carga, *lead times* estimados y mercadería en tránsito desde el Centro de Distribución Huachipa hacia las tiendas.
+Este repositorio contiene la **Aplicación Web Frontend** del Asistente de Transporte y Despachos de **Tottus Perú (Falabella)**. Permite a supervisores de tienda y coordinadores logísticos consultar en lenguaje natural el estado de camiones, placas, guías (`Trf_DO`), embarques (`Shipment`), transferencias (`TIM`), consolidado de carga, *lead times* estimados, mercadería en tránsito desde el Centro de Distribución Huachipa y seguimiento en vivo de unidades de provincia/oriente (SharePoint / Excel).
 
-> 🔗 **Repositorio Backend asociado:** `agent-test` (API Gateway con FastAPI, Google Gemini y Toolbox MCP sobre BigQuery).
+> 🔗 **Repositorio Backend asociado:** `agent-test` (API Gateway con FastAPI, Google Gemini, Toolbox MCP sobre BigQuery y `MonitoreoService` sobre SharePoint).
 
 ---
 
